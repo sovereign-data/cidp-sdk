@@ -60,6 +60,7 @@ class CIDPClient:
         self.saved_queries = services.SavedQueries(h)
         # governance
         self.permissions = services.Permissions(h)
+        self.governance = services.Governance(h)  # internal: masks, row filters, governed tags
         self.contracts = services.Contracts(h)
         self.quality = services.Quality(h)
         self.lineage = services.Lineage(h)

@@ -15,6 +15,13 @@ class PreviewWarning(UserWarning):
     ``warnings.filterwarnings("ignore", category=PreviewWarning)``."""
 
 
+class InternalWarning(PreviewWarning):
+    """An ``internal`` operation of the API, the data UI's own, that the SDK calls all the same (governance's masks,
+    row filters and governed tags, ``client.governance``): it may change or go away in any release, without notice.
+    Raised once per operation and process. A ``PreviewWarning``, so the filter that silences those silences it too;
+    ``warnings.filterwarnings("ignore", category=InternalWarning)`` silences only these."""
+
+
 class CIDPError(Exception):
     """Any failure of a call to the data service."""
 

@@ -2,12 +2,15 @@
 
 Handles are lazy: building one calls nothing; ``fetch()`` reads it, iterating a collection lists it. ``catalog()``
 without a name is the workspace's home catalog.
+
+Governance (``catalog.governance()``, the tag helpers on ``CatalogRef``, masks and row filters on ``TableRef``) calls
+``internal`` operations: each warns once with ``InternalWarning`` and may change without notice.
 """
 
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import TYPE_CHECKING
+from collections.abc import Iterator, Mapping, Sequence
+from typing import TYPE_CHECKING, Any
 
 from cidp_sdk import _models as m
 from cidp_sdk.session import Result, Session
@@ -92,6 +95,30 @@ class CatalogRef:
     def permissions(self) -> PermissionsRef:
         return PermissionsRef(self.workspace, "catalog", self.name)
 
+    def governance(self) -> GovernanceRef:
+        """The catalog's governance: batches of changes with a dry run, governed tags (internal operations)."""
+        return GovernanceRef(self)
+
+    # Governed tags of the catalog (``tag_*`` changes), each applied on its own; GovernanceRef has the same.
+    def define_tag(self, name: str, description: str | None = None) -> m.PreviewOut:
+        return self.governance().define_tag(name, description)
+
+    def drop_tag(self, name: str) -> m.PreviewOut:
+        return self.governance().drop_tag(name)
+
+    def tag_mask(self, name: str, mask_type: str, *, except_groups: Sequence[str] | None = None) -> m.PreviewOut:
+        return self.governance().tag_mask(name, mask_type, except_groups=except_groups)
+
+    def tag_unmask(self, name: str) -> m.PreviewOut:
+        return self.governance().tag_unmask(name)
+
+    def tag_row_filter(self, name: str, expression: str, *, groups: Sequence[str] | None = None,
+                       except_groups: Sequence[str] | None = None) -> m.PreviewOut:  # fmt: skip
+        return self.governance().tag_row_filter(name, expression, groups=groups, except_groups=except_groups)
+
+    def tag_clear_row_filter(self, name: str) -> m.PreviewOut:
+        return self.governance().tag_clear_row_filter(name)
+
 
 class SchemaCollection:
     def __init__(self, catalog: CatalogRef):
@@ -174,6 +201,35 @@ class TableRef:
     def permissions(self) -> PermissionsRef:
         return PermissionsRef(self.schema._ws, "table", self.full_name)
 
+    # Masks and row filters (internal operations): each applied on its own, all or nothing.
+    def _apply(self, op: str, **fields: Any) -> m.PreviewOut:
+        change = {"op": op, "schema": self.schema.name, "table": self.name, **fields}
+        return self.schema.catalog.governance().apply({k: v for k, v in change.items() if v is not None})
+
+    def governance(self) -> m.PermissionsOut:
+        """The table's owner, grants, masks, row filter and the tags on its columns (``Governance.get``)."""
+        s = self.schema
+        return s._ws._client.governance.get(s._ws.slug, s.catalog.name, schema=s.name, table=self.name)
+
+    def mask(self, column: str, mask_type: str, *, except_groups: Sequence[str] | None = None,
+             expression: str | None = None) -> m.PreviewOut:  # fmt: skip
+        """Mask ``column`` for everyone but ``except_groups``; ``mask_type`` is one of ``services.MASK_TYPES``."""
+        return self._apply("mask", column=column, mask_type=mask_type, expression=expression,
+                           except_groups=_list(except_groups))  # fmt: skip
+
+    def unmask(self, column: str) -> m.PreviewOut:
+        return self._apply("unmask", column=column)
+
+    def row_filter(self, expression: str, *, groups: Sequence[str] | None = None,
+                   except_groups: Sequence[str] | None = None) -> m.PreviewOut:  # fmt: skip
+        """Rows matching ``expression`` only, for ``groups`` (none: everyone) but not ``except_groups``. A table has
+        one row filter per person: a filter that could meet another is 409 ``row_filter_conflict``."""
+        return self._apply("row_filter", expression=expression, groups=_list(groups),
+                           except_groups=_list(except_groups))  # fmt: skip
+
+    def clear_row_filter(self) -> m.PreviewOut:
+        return self._apply("clear_row_filter")
+
 
 class ViewRef(TableRef):
     def __repr__(self) -> str:
@@ -201,6 +257,74 @@ class PermissionsRef:
     def update(self, changes: list[dict[str, object]]) -> m.PermissionsInfo:
         return self.workspace._client.permissions.update(self.workspace.slug, self.securable_type, self.full_name,
                                                          changes)  # fmt: skip
+
+
+def _list(groups: Sequence[str] | None) -> list[str] | None:
+    return None if groups is None else list(groups)
+
+
+Change = m.GovernanceChange | Mapping[str, Any]
+
+
+class GovernanceRef:
+    """A catalog's governance (``CatalogRef.governance()``): ``apply`` and ``preview`` take changes as
+    ``Governance.apply`` does, ``{"op": "grant", "schema": ..., "group": ..., "privilege": ...}`` or a
+    ``GovernanceChange``. Internal operations: each warns once with ``InternalWarning``."""
+
+    def __init__(self, catalog: CatalogRef):
+        self.catalog = catalog
+
+    def __repr__(self) -> str:
+        return f"GovernanceRef({self.catalog.name!r})"
+
+    def _args(self) -> tuple[str, str]:
+        return self.catalog.workspace.slug, self.catalog.name
+
+    @property
+    def _service(self):  # noqa: ANN202
+        return self.catalog.workspace._client.governance
+
+    def fetch(self, *, schema: str | None = None, table: str | None = None) -> m.PermissionsOut:
+        """The catalog's (or a schema's, or a table's) owner, grants, masks and row filter."""
+        return self._service.get(*self._args(), schema=schema, table=table)
+
+    def tags(self) -> m.TagsOut:
+        return self._service.tags(*self._args())
+
+    def apply(self, *changes: Change) -> m.PreviewOut:
+        """Apply the changes all or nothing."""
+        return self._service.apply(*self._args(), list(changes))
+
+    def preview(self, *changes: Change) -> m.PreviewOut:
+        """What ``apply`` would change; writes nothing."""
+        return self._service.preview(*self._args(), list(changes))
+
+    def _tag(self, op: str, name: str, **fields: Any) -> m.PreviewOut:
+        return self.apply({"op": op, "tag": name, **{k: v for k, v in fields.items() if v is not None}})
+
+    def define_tag(self, name: str, description: str | None = None) -> m.PreviewOut:
+        """A governed tag of the catalog; a column carries it in its table's ``sqe.column-tags`` property."""
+        return self._tag("tag_define", name, description=description)
+
+    def drop_tag(self, name: str) -> m.PreviewOut:
+        return self._tag("tag_drop", name)
+
+    def tag_mask(self, name: str, mask_type: str, *, except_groups: Sequence[str] | None = None) -> m.PreviewOut:
+        """Mask every column with the tag (409 when tag policies are off in the deployment: ``tags().policies``)."""
+        return self._tag("tag_mask", name, mask_type=mask_type, except_groups=_list(except_groups))
+
+    def tag_unmask(self, name: str) -> m.PreviewOut:
+        return self._tag("tag_unmask", name)
+
+    def tag_row_filter(self, name: str, expression: str, *, groups: Sequence[str] | None = None,
+                       except_groups: Sequence[str] | None = None) -> m.PreviewOut:  # fmt: skip
+        """Filter the rows of every table with a column of the tag (409 ``row_filter_conflict`` when it could meet
+        another filter, ``row_filter_unchecked`` when that cannot be checked)."""
+        return self._tag("tag_row_filter", name, expression=expression, groups=_list(groups),
+                         except_groups=_list(except_groups))  # fmt: skip
+
+    def tag_clear_row_filter(self, name: str) -> m.PreviewOut:
+        return self._tag("tag_clear_row_filter", name)
 
 
 class ProjectRef:

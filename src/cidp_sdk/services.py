@@ -1,7 +1,8 @@
 """One class per area of the v1 contract: each method is one operation, marked with its operationId (design A4).
 
 ``@op`` ties a method to its row in ``_operations`` (generated from ``openapi-v1.json``): an unknown id fails at
-import, and a ``preview`` operation warns once with ``PreviewWarning`` (data-api-consistency AC-9). The SDK tests call
+import, and a ``preview`` operation warns once with ``PreviewWarning`` (data-api-consistency AC-9), an ``internal`` one
+(``INTERNAL_OPERATIONS``: governance's masks, row filters and tags) with ``InternalWarning``. The SDK tests call
 every method and check the request against that row; the operations no method covers are in ``NOT_IN_SDK``.
 
 Listings with ``next_cursor`` are iterators that follow it (``limit`` is the page size, not a cap on the items); a
@@ -23,8 +24,8 @@ from pydantic import BaseModel
 from cidp_sdk import _models as m
 from cidp_sdk._events import wait_until
 from cidp_sdk._http import API, Http, raw_body
-from cidp_sdk._operations import OPERATIONS
-from cidp_sdk.errors import PreviewWarning
+from cidp_sdk._operations import INTERNAL_OPERATIONS, OPERATIONS
+from cidp_sdk.errors import InternalWarning, PreviewWarning
 
 ARROW = "application/vnd.apache.arrow.stream"
 F = TypeVar("F", bound=Callable[..., Any])
@@ -46,16 +47,21 @@ _warned: set[str] = set()
 
 
 def op(operation_id: str) -> Callable[[F], F]:
-    """Mark a method as the operation ``operation_id``; a preview one warns on its first use in the process."""
-    _, _, level, _ = OPERATIONS[operation_id]
+    """Mark a method as the operation ``operation_id``; a preview or internal one warns on its first use in the
+    process."""
+    _, _, level, _ = OPERATIONS.get(operation_id) or INTERNAL_OPERATIONS[operation_id]
 
     def wrap(fn: F) -> F:
         @functools.wraps(fn)
         def call(*args: Any, **kwargs: Any) -> Any:
-            if level == "preview" and operation_id not in _warned:
+            if level in ("preview", "internal") and operation_id not in _warned:
                 _warned.add(operation_id)
-                warnings.warn(f"{operation_id} is a preview operation of the data API: it may change in a minor "
-                              "release (see the CHANGELOG)", PreviewWarning, stacklevel=2)  # fmt: skip
+                if level == "preview":
+                    warnings.warn(f"{operation_id} is a preview operation of the data API: it may change in a minor "
+                                  "release (see the CHANGELOG)", PreviewWarning, stacklevel=2)  # fmt: skip
+                else:
+                    warnings.warn(f"{operation_id} is an internal operation of the data API: it may change in any "
+                                  "release, without notice", InternalWarning, stacklevel=2)  # fmt: skip
             return fn(*args, **kwargs)
 
         call.operation = operation_id  # type: ignore[attr-defined]
@@ -520,6 +526,58 @@ class Permissions(_Service):
         body = {"changes": [c.model_dump(exclude_none=True) for c in items]}
         return self._http.send("PATCH", _p("workspaces", slug, "permissions", securable_type, full_name),
                                m.PermissionsInfo, body)  # fmt: skip
+
+
+# Column masks the service knows (ai-portal-data masks.MASK_TYPES, governance 1.12). Not checked here: the service
+# answers 422 for another, and may add types.
+MASK_TYPES = ("MASK", "MASK_SHOW_LAST_4", "MASK_SHOW_FIRST_4", "MASK_HASH", "MASK_NULL", "MASK_DATE_SHOW_YEAR")
+
+
+def _changes(changes: Sequence[m.GovernanceChange | Mapping[str, Any]]) -> dict[str, Any]:
+    """The body of a batch: each change a model or a mapping (``schema``, not ``namespace``), None fields left out."""
+    items = [c if isinstance(c, m.GovernanceChange) else m.GovernanceChange.model_validate(dict(c)) for c in changes]
+    return {"changes": [c.model_dump(by_alias=True, exclude_none=True, mode="json") for c in items]}
+
+
+class Governance(_Service):
+    """Grants, owners, column masks, row filters and governed tags of a workspace's catalog, in batches with a dry run.
+
+    ``internal`` operations (the data UI's own, until VPFDATA-713 settles their public shape): each warns once with
+    ``InternalWarning`` and may change without notice. The public grants are ``Permissions``. A change names its
+    securable with ``schema`` and ``table`` (neither: the catalog; ``tag_*`` changes name neither); the answers name the
+    schema ``namespace``.
+    """
+
+    def _path(self, workspace: str, catalog: str, *rest: str) -> str:
+        return _p("workspaces", workspace, "catalogs", catalog, "governance", *rest)
+
+    @op("governance_get")
+    def get(self, workspace: str, catalog: str, *, schema: str | None = None,
+            table: str | None = None) -> m.PermissionsOut:  # fmt: skip
+        """The catalog, a schema or a table: owner, grants (and the inherited ones), masks, the row filter, the tags on
+        its columns, and what the caller may do."""
+        return self._http.get(self._path(workspace, catalog), m.PermissionsOut, schema=schema, table=table)
+
+    @op("governance_tags_list")
+    def tags(self, workspace: str, catalog: str) -> m.TagsOut:
+        """The catalog's governed tags with their mask and row filter; ``policies`` says whether tag masks and row
+        filters reach Ranger in this deployment, ``can_manage`` whether the caller may change them."""
+        return self._http.get(self._path(workspace, catalog, "tags"), m.TagsOut)
+
+    @op("governance_changes_apply")
+    def apply(self, workspace: str, catalog: str,
+              changes: Sequence[m.GovernanceChange | Mapping[str, Any]]) -> m.PreviewOut:  # fmt: skip
+        """Apply the changes (1 to 50) all or nothing, as the caller; the answer is what changed. 409 ``Conflict``
+        (``row_filter_conflict``, ``mask_conflict``, ...: ``details`` names them), 422 ``InvalidParameter``."""
+        return self._http.send("POST", self._path(workspace, catalog, "changes"), m.PreviewOut, _changes(changes))
+
+    @op("governance_changes_preview")
+    def preview(self, workspace: str, catalog: str,
+                changes: Sequence[m.GovernanceChange | Mapping[str, Any]]) -> m.PreviewOut:  # fmt: skip
+        """What ``apply`` would change (the Ranger diff, masks and tag policies, grants that would do nothing and the
+        grants that would make them work); writes nothing."""
+        return self._http.send("POST", self._path(workspace, catalog, "changes", "preview"), m.PreviewOut,
+                               _changes(changes))  # fmt: skip
 
 
 class Contracts(_Service):
