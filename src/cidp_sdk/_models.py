@@ -4,7 +4,7 @@ Do not edit: `make sdk-models` writes this file (scripts/sdk_models.py). Unknown
 accepts values added within v1, so a newer service does not break this SDK.
 """
 
-# contract sha256: 0fdf2e878e3000d555ccf865cae319391706ea346323e0598853d7928d20109f
+# contract sha256: 4ef720d7583e2ce65cde4a699c749cdb683bfe2b0a01d705be1f4abcc6c66c9d
 # ruff: noqa: E501
 
 from __future__ import annotations
