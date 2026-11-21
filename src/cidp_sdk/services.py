@@ -1112,6 +1112,31 @@ class Me(_Service):
     def get(self) -> m.MeOut:
         return self._http.get("/me", m.MeOut)
 
+    @op("me_events")
+    def events(self, *, since: str | None = None, follow: bool = True) -> Iterator[dict[str, Any]]:
+        """The caller's changes as they commit (``GET /me/events``, stable): ``{"event": "change", "id", "data"}``
+        each (``data``: type, resource, full_name, etag, status), then ``{"event": "reset"}`` when changes were lost
+        (list again, then call without ``since``) or ``{"event": "reconnect"}`` when the token or the hour ended (call
+        again with the last id), after which the iterator ends. ``since``: resume after that id. ``follow``: wait for
+        new changes; otherwise stop at the service's first heartbeat. ``wait_run`` and ``cidp events`` resume on
+        their own."""
+        for event, data, ident in self._http.events("/me/events", params={"last_event_id": since}):
+            if event == "ping":
+                if not follow:
+                    return
+                continue
+            if event in ("reset", "reconnect"):
+                yield {"event": event}
+                return
+            if event != "change":
+                continue
+            try:
+                body = json.loads(data)
+            except ValueError:
+                continue
+            if isinstance(body, dict):
+                yield {"event": "change", "id": ident, "data": body}
+
     @op("groups_list")
     def groups(self) -> m.Groups:
         """The known groups (every workspace's viewer and admin groups, the default owner group and the caller's

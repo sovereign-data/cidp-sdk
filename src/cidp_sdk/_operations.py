@@ -7,7 +7,7 @@ first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are 
 without notice.
 """
 
-# contract sha256: 0fdf2e878e3000d555ccf865cae319391706ea346323e0598853d7928d20109f
+# contract sha256: 4ef720d7583e2ce65cde4a699c749cdb683bfe2b0a01d705be1f4abcc6c66c9d
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
@@ -89,6 +89,7 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'lineage_producers_revoke': ('POST', '/lineage/producers/{producer_id}/revoke', 'preview', 'governance'),
     'lineage_status_get': ('GET', '/lineage/status', 'preview', 'governance'),
     'lineage_upstream_problems': ('GET', '/workspaces/{workspace}/catalogs/{catalog}/schemas/{schema}/tables/{table}/lineage/upstream-problems', 'preview', 'governance'),
+    'me_events': ('GET', '/me/events', 'stable', 'me'),
     'me_get': ('GET', '/me', 'preview', 'me'),
     'me_git_credentials_delete': ('DELETE', '/me/git-credentials/{host}', 'preview', 'me'),
     'me_git_credentials_list': ('GET', '/me/git-credentials', 'preview', 'me'),
