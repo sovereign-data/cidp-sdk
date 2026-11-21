@@ -575,6 +575,7 @@ def _confirm(what: str, yes: bool) -> None:
 
 # Operations whose answer is a server-sent stream: ``api call`` would wait for its end; the curated command reads it.
 STREAMS: dict[str, str] = {
+    "me_events": "use `cidp events [--since ID]` or the SDK's Me.events()",
     "projects_runs_logs": "use `cidp runs logs PROJECT RUN [--follow]`",
     "quality_runs_run_all": "use the data UI or the SDK's Quality.run() per table",
 }

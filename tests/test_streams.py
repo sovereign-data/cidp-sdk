@@ -17,7 +17,7 @@ import pytest
 from cidp_sdk import PermissionDenied, TransportError
 from cidp_sdk._http import FileBody, Http, raw_body
 from cidp_sdk.auth import StaticToken
-from cidp_sdk.services import Projects
+from cidp_sdk.services import Me, Projects
 
 HOST = "https://portal.example.org"
 TOKEN = "tok-streams-0123456789"  # gitleaks:allow - a test stand-in
@@ -57,6 +57,29 @@ def test_cc4_logs_follow_ends_at_the_end_event_and_not_follow_at_a_ping():
     assert followed[-1] == {"event": "end", "status": "succeeded", "error": None}
     assert list(projects.logs("sales", "etl", "r1", follow=False)) == [
         {"event": "line", "seq": 1, "stream": "stdout", "line": "one"}]  # fmt: skip
+
+
+CHANGES = ('id: 7.1\nevent: change\ndata: {"type": "portal.data.run.finished", "status": "succeeded"}\n\n'
+           ': ping\n\n'
+           'id: 7.2\nevent: change\ndata: {"type": "portal.data.job.run.started"}\n\n'
+           'event: reset\ndata: {}\n\n'
+           'id: 8.1\nevent: change\ndata: {"type": "never"}\n\n')  # fmt: skip
+
+
+def test_cc4_me_events_yields_changes_with_ids_and_ends_at_reset():
+    seen: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request)
+        return sse(CHANGES)
+
+    me = Me(http(handler))
+    followed = list(me.events(since="6.9"))
+    assert [e.get("id") for e in followed] == ["7.1", "7.2", None]
+    assert followed[0]["data"]["status"] == "succeeded" and followed[-1] == {"event": "reset"}
+    assert seen[0].url.path.endswith("/me/events") and seen[0].url.params["last_event_id"] == "6.9"
+    assert [e["id"] for e in me.events(follow=False)] == ["7.1"]
+    assert "last_event_id" not in seen[-1].url.params
 
 
 def test_cc4_a_refused_stream_raises_its_error_class():
