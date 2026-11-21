@@ -116,6 +116,13 @@ class Deployment:
                 return httpx.Response(200, json={"commit": "abc", "deployed": ["nightly"], "changed": [],
                                                  "undeployed": [], "errors": self.deploy_errors,
                                                  "target": None})  # fmt: skip
+            case ("POST", p) if p == f"{P}/deployment/validate":
+                body = json.loads(request.read() or b"{}")
+                return httpx.Response(200, json={"commit": "abc", "branch": body.get("branch") or "main",
+                                                 "file": "databricks.yml", "target": body.get("target") or "dev",
+                                                 "deployed": ["nightly"], "errors": self.deploy_errors})  # fmt: skip
+            case ("DELETE", p) if p == f"{P}/deployment":
+                return httpx.Response(200, json={"target": "dev", "undeployed": ["nightly"], "cancelled": 1})
             case ("POST", p) if p == f"{P}/jobs/nightly/runs/j1/retry":
                 return httpx.Response(200, json=job_run("queued"))
             case ("GET", p) if p == f"{P}/jobs/nightly/runs/j2":
@@ -245,6 +252,44 @@ def test_cc3_jobs_deploy_and_retry(deployment):
     assert r.exit_code == 0, r.output
     assert json.loads(r.stdout)[0]["status"] == "succeeded"
     assert deployment.made("POST", f"{P}/jobs/nightly/runs/j1/retry")
+
+
+def test_bundle_validate_deploy_destroy(deployment):
+    """VPFDATA-882: `cidp bundle validate`, `deploy` and `destroy` send the deployment calls and exit as they
+    should: 0 when clean, 1 with errors (nothing deployed), 2 for a destroy that is not confirmed."""
+    r = cidp("-o", "json", "bundle", "validate", "etl", "--target", "dev", "--branch", "feature")
+    assert r.exit_code == 0, r.output
+    assert deployment.calls[-1][:2] == ("POST", f"{P}/deployment/validate")
+    assert json.loads(deployment.bodies[-1]) == {"target": "dev", "branch": "feature"}
+    out = json.loads(r.stdout)[0]
+    assert (out["branch"], out["target"], out["deployed"], out["errors"]) == ("feature", "dev", ["nightly"], [])
+    r = cidp("-o", "json", "bundle", "validate", "etl")  # the default target and branch: nothing sent
+    assert r.exit_code == 0, r.output
+    assert json.loads(deployment.bodies[-1]) == {}
+
+    r = cidp("-o", "json", "bundle", "deploy", "etl", "-t", "dev")
+    assert r.exit_code == 0, r.output
+    assert deployment.calls[-1][:2] == ("PUT", f"{P}/deployment")
+    assert json.loads(deployment.bodies[-1]) == {"target": "dev"}
+    assert json.loads(r.stdout)[0]["deployed"] == ["nightly"]
+
+    deployment.deploy_errors = [{"path": "jobs/nightly", "message": "unknown task"}]
+    r = cidp("-o", "json", "bundle", "validate", "etl", "--target", "prod")
+    assert r.exit_code == 1
+    assert "Not valid: 1 error(s)." in r.stderr
+    r = cidp("-o", "json", "bundle", "deploy", "etl", "--target", "prod")
+    assert r.exit_code == 1
+    assert "Not deployed: 1 error(s)." in r.stderr
+    assert json.loads(deployment.bodies[-1]) == {"target": "prod"}
+
+    n = len(deployment.calls)
+    r = cidp("bundle", "destroy", "etl")  # no terminal and no --yes: refused before any call
+    assert r.exit_code == 2
+    assert not any(c[0] == "DELETE" for c in deployment.calls[n:])
+    r = cidp("-o", "json", "bundle", "destroy", "etl", "--yes")
+    assert r.exit_code == 0, r.output
+    assert deployment.calls[-1][:2] == ("DELETE", f"{P}/deployment")
+    assert json.loads(r.stdout)[0] == {"target": "dev", "undeployed": ["nightly"], "cancelled": 1}
 
 
 def test_cc3_grants(deployment):

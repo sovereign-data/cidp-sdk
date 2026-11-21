@@ -112,10 +112,12 @@ grants_app = typer.Typer(help="Grants on a catalog, schema, table or view.", no_
 volumes_app = typer.Typer(help="Volumes and their files.", no_args_is_help=True)
 statements_app = typer.Typer(help="Asynchronous statements, step by step (`cidp sql` does it in one).",
                              no_args_is_help=True)  # fmt: skip
+bundle_app = typer.Typer(help="A project's bundle (as `databricks bundle`): validate, deploy, destroy.",
+                         no_args_is_help=True)  # fmt: skip
 for sub, name in ((workspaces_app, "workspaces"), (catalogs_app, "catalogs"), (schemas_app, "schemas"),
                   (tables_app, "tables"), (views_app, "views"), (jobs_app, "jobs"), (api_app, "api"),
                   (projects_app, "projects"), (runs_app, "runs"), (grants_app, "grants"), (volumes_app, "volumes"),
-                  (statements_app, "statements")):  # fmt: skip
+                  (statements_app, "statements"), (bundle_app, "bundle")):  # fmt: skip
     app.add_typer(sub, name=name)
 
 
@@ -497,6 +499,53 @@ def jobs_deploy(ctx: typer.Context, project: str,
         if result.errors:
             err.print(f"Not deployed: {len(result.errors)} error(s).", markup=False)
             raise typer.Exit(1)
+
+    _run(ctx, work)
+
+
+# --- bundle: validate, deploy, destroy (as `databricks bundle`) --------------------------------------------------
+
+TargetOpt = Annotated[str | None, typer.Option("--target", "-t", help="A target of databricks.yml or project.yml")]
+
+
+@bundle_app.command("validate")
+def bundle_validate(ctx: typer.Context, project: str, target: TargetOpt = None,
+                    branch: Annotated[str | None, typer.Option(help="A branch (default: the default branch)")] = None,
+                    ) -> None:  # fmt: skip
+    """Validate the project's bundle with a target, as you would deploy it; nothing changes. Exit 1 on errors."""
+
+    def work(client: CIDPClient, state: State) -> None:
+        result = client.jobs.validate_deployment(client.workspace().slug, project, target=target, branch=branch)
+        emit_one(state, _plain(result))
+        if result.errors:
+            err.print(f"Not valid: {len(result.errors)} error(s).", markup=False)
+            raise typer.Exit(1)
+
+    _run(ctx, work)
+
+
+@bundle_app.command("deploy")
+def bundle_deploy(ctx: typer.Context, project: str, target: TargetOpt = None) -> None:
+    """Deploy the default branch's bundle with a target, as you. With errors nothing changes (exit 1)."""
+
+    def work(client: CIDPClient, state: State) -> None:
+        result = client.jobs.deploy(client.workspace().slug, project, target=target)
+        emit_one(state, _plain(result))
+        if result.errors:
+            err.print(f"Not deployed: {len(result.errors)} error(s).", markup=False)
+            raise typer.Exit(1)
+
+    _run(ctx, work)
+
+
+@bundle_app.command("destroy")
+def bundle_destroy(ctx: typer.Context, project: str, yes: YesOpt = False) -> None:
+    """Undeploy every job of the project (asks first, or --yes); runs are cancelled, history stays."""
+
+    def work(client: CIDPClient, state: State) -> None:
+        slug = client.workspace().slug
+        _confirm(f"Destroy the deployment of project {project} in {slug}", yes)
+        emit_one(state, _plain(client.jobs.destroy(slug, project)))
 
     _run(ctx, work)
 

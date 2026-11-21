@@ -168,6 +168,9 @@ cidp runs start etl dbt.build --path dbt_project.yml --wait   # also list, get, 
 cidp runs logs etl <run-id> --follow     # stdout lines to stdout, stderr lines to stderr
 cidp jobs deploy etl                     # exits 1 when the deploy has errors
 cidp jobs retry etl nightly <run-id> --wait
+cidp bundle validate etl --target dev    # as `databricks bundle validate`; exits 1 on errors, nothing changes
+cidp bundle deploy etl --target dev      # deploy the default branch's bundle; exits 1 on errors
+cidp bundle destroy etl --yes            # undeploy every job; history stays
 cidp grants list catalog sales
 cidp grants add schema sales.tpch SG-Analysts SELECT "USE SCHEMA"   # or remove
 cidp volumes ls raw.docs                 # also list, put, get
