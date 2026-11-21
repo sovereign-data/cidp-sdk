@@ -2,10 +2,12 @@
 
 Do not edit: `make sdk-models` writes this file (scripts/sdk_models.py). operationId -> (method, path under
 /api/data/v1, level, service). A ``preview`` operation may change in a minor release; the SDK warns on its
-first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are not here.
+first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are not here, except those in
+``INTERNAL_OPERATIONS``: the SDK calls them all the same and warns (``InternalWarning``); they may change
+without notice.
 """
 
-# contract sha256: 51d3e3f5663ede9798516a2de99d43769d3c9e032a51d83cfc95a110c1509f63
+# contract sha256: 0fdf2e878e3000d555ccf865cae319391706ea346323e0598853d7928d20109f
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
@@ -224,4 +226,11 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'workspaces_storage': ('GET', '/workspaces/{workspace}/storage', 'stable', 'catalog'),
     'workspaces_summary': ('GET', '/workspaces/{workspace}/summary', 'stable', 'catalog'),
     'workspaces_update': ('PATCH', '/workspaces/{workspace}', 'stable', 'catalog'),
+}
+
+INTERNAL_OPERATIONS: dict[str, tuple[str, str, str, str]] = {
+    'governance_changes_apply': ('POST', '/workspaces/{workspace}/catalogs/{catalog}/governance/changes', 'internal', 'governance'),
+    'governance_changes_preview': ('POST', '/workspaces/{workspace}/catalogs/{catalog}/governance/changes/preview', 'internal', 'governance'),
+    'governance_get': ('GET', '/workspaces/{workspace}/catalogs/{catalog}/governance', 'internal', 'governance'),
+    'governance_tags_list': ('GET', '/workspaces/{workspace}/catalogs/{catalog}/governance/tags', 'internal', 'governance'),
 }

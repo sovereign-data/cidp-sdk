@@ -1,7 +1,8 @@
 """The SDK's services against the contract (OpenSpec change data-api-consistency, task 4.1, AC-9).
 
 Every ``stable`` and ``preview`` operation of ``openapi-v1.json`` is a method of a service or named in
-``NOT_IN_SDK`` with a reason; every method, called with stand-in arguments, sends its operation's method and path;
+``NOT_IN_SDK`` with a reason, and the ``internal`` operations the SDK calls all the same (``INTERNAL_OPERATIONS``) have
+a method each; every method, called with stand-in arguments, sends its operation's method and path;
 ``_operations.py`` is the one the generator writes from the committed contract.
 """
 
@@ -21,10 +22,11 @@ import pytest
 
 from cidp_sdk import PreviewWarning, services
 from cidp_sdk._http import Http
-from cidp_sdk._operations import OPERATIONS
+from cidp_sdk._operations import INTERNAL_OPERATIONS, OPERATIONS
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "/api/data/v1"
+ALL = {**OPERATIONS, **INTERNAL_OPERATIONS}
 
 # Arguments a stand-in string cannot fill: bodies passed whole, and lists of grants or changes.
 WHOLE = {
@@ -48,6 +50,8 @@ def methods() -> Iterator[tuple[str, str, Callable[..., Any]]]:
 def stand_in(name: str, annotation: str) -> Any:
     if name == "ids" and "int" in annotation:
         return [1]
+    if name == "changes" and "GovernanceChange" in annotation:
+        return [{"op": "grant", "schema": "s", "group": "SG-A", "privilege": "SELECT"}]
     if name in WHOLE:
         return WHOLE[name]
     if "bytes" in annotation:
@@ -69,18 +73,25 @@ def arguments(fn: Callable[..., Any]) -> dict[str, Any]:
 
 
 def template(operation_id: str) -> re.Pattern[str]:
-    path = OPERATIONS[operation_id][1]
+    path = ALL[operation_id][1]
     return re.compile("^" + re.escape(API) + re.sub(r"\\\{[^}]+\\\}", "[^/]+", re.escape(path)) + "$")
 
 
 def test_every_public_operation_is_in_the_sdk_or_named_as_left_out() -> None:
-    covered = {fn.operation for _, _, fn in methods()}
+    covered = {fn.operation for _, _, fn in methods()} - set(INTERNAL_OPERATIONS)
     assert covered <= set(OPERATIONS), covered - set(OPERATIONS)
     left_out = set(services.NOT_IN_SDK)
     assert left_out <= set(OPERATIONS), left_out - set(OPERATIONS)
     assert not covered & left_out, covered & left_out
     assert set(OPERATIONS) == covered | left_out, sorted(set(OPERATIONS) - covered - left_out)
     assert all(reason.strip() for reason in services.NOT_IN_SDK.values())
+
+
+def test_each_internal_operation_in_the_sdk_has_a_method() -> None:
+    covered = {fn.operation for _, _, fn in methods()}
+    assert set(INTERNAL_OPERATIONS) <= covered, set(INTERNAL_OPERATIONS) - covered
+    assert not set(INTERNAL_OPERATIONS) & set(OPERATIONS)
+    assert {v[2] for v in INTERNAL_OPERATIONS.values()} == {"internal"}
 
 
 @pytest.mark.parametrize(("cls", "name", "fn"), list(methods()), ids=lambda v: v if isinstance(v, str) else "")
@@ -102,7 +113,7 @@ def test_each_method_sends_its_operation(cls: str, name: str, fn: Callable[..., 
         except (pydantic.ValidationError, KeyError, TypeError, ValueError, OSError):
             pass  # the stand-in answer fits no model; the request is what is checked
     assert sent, f"{cls}.{name} sent nothing"
-    method, _, _, _ = OPERATIONS[fn.operation]
+    method, _, _, _ = ALL[fn.operation]
     last = sent[-1]
     assert last.method == method, f"{cls}.{name}: {last.method}, the contract says {method}"
     assert template(fn.operation).match(last.url.path), f"{cls}.{name}: {last.url.path} is not {fn.operation}"

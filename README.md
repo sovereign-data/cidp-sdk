@@ -71,6 +71,8 @@ with CIDPClient("dev") as client:
   stream). `client.projects.logs(...)` reads a run's log lines as they come.
 - A `preview` operation may still change: its first call in a process warns with `PreviewWarning`. Silence it with
   `warnings.filterwarnings("ignore", category=PreviewWarning)`.
+- `client.governance` reaches a few `internal` operations as well (see [Governance](#governance)). Their first call
+  in a process warns with `InternalWarning`, a subclass of `PreviewWarning`.
 - `client.versions` gives each service's version as the deployment states it (`/v1/config`).
 - Listings are iterators that follow `next_cursor`.
 - `client.jobs.wait_run(...)` and `client.projects.wait_run(...)` (or `JobRef.wait` and `ProjectRef.wait`) return a
@@ -81,6 +83,54 @@ with CIDPClient("dev") as client:
 - Errors carry `code`, `status` and `request_id`. They are `InvalidParameter`, `Unauthenticated`, `PermissionDenied`,
   `NotFound`, `Conflict`, `TooManyRequests` (with `retry_after`), `Unavailable`, `StatementFailed` and `WaitTimeout`,
   all subclasses of `CIDPError`.
+
+## Governance
+
+Column masks, row filters, governed tags and their policies, and grants and owners in one batch with a dry run. These
+are `internal` operations of the data service: the data UI's own, whose public shape waits for VPFDATA-713. They may
+change or go away in any release, without notice. Their first call in a process warns with `InternalWarning`.
+
+```python
+import warnings
+from cidp_sdk import Conflict, InternalWarning
+
+warnings.filterwarnings("ignore", category=InternalWarning)   # you accept that they may change
+
+finance = client.workspace("sales").catalog("finance")
+orders = finance.schema("raw").table("orders")
+
+orders.mask("card", "MASK_SHOW_LAST_4", except_groups=["SG-Fin"])   # also unmask("card")
+orders.row_filter("region = 'EU'", except_groups=["SG-Fin"])        # also clear_row_filter()
+orders.governance()                     # owner, grants, masks, row filter, tags on its columns
+
+finance.define_tag("pii", "Personal data")                          # also drop_tag("pii")
+finance.tag_mask("pii", "MASK_HASH", except_groups=["SG-DPO"])      # also tag_unmask("pii")
+try:
+    finance.tag_row_filter("pii", "country = 'NL'", groups=["SG-Support"])   # also tag_clear_row_filter("pii")
+except Conflict as e:
+    print(e.code, e.details)            # row_filter_conflict {'table': ..., 'filter': ..., 'conflicts_with': ...}
+
+gov = finance.governance()
+gov.tags()                              # .items, .policies (tag policies on in this deployment), .can_manage
+gov.preview({"op": "grant", "schema": "raw", "group": "SG-A", "privilege": "SELECT"})   # a dry run
+gov.apply({"op": "grant", "schema": "raw", "group": "SG-A", "privilege": "SELECT"},
+          {"op": "mask", "schema": "raw", "table": "orders", "column": "email", "mask_type": "MASK_NULL"})
+```
+
+- Each helper applies one change. `apply` and `preview` take 1 to 50 changes, all or nothing. A change is a dict or a
+  `GovernanceChange` (`cidp_sdk._models`), and its fields left as `None` are not sent. Its `op` is one of `grant`,
+  `revoke`, `transfer`, `clear_owner`, `forget`, `mask`, `unmask`, `row_filter`, `clear_row_filter`, `tag_define`,
+  `tag_drop`, `tag_mask`, `tag_unmask`, `tag_row_filter` or `tag_clear_row_filter`.
+- A change names the schema with `schema`, but the answers (`PermissionsOut`, `PreviewOut.suggestions`) call it
+  `namespace`.
+- The same calls sit on the service: `client.governance.get(ws, catalog, schema=, table=)`, `tags(ws, catalog)`,
+  `apply(ws, catalog, changes)` and `preview(ws, catalog, changes)`.
+- The mask types are listed in `services.MASK_TYPES`: `MASK`, `MASK_SHOW_LAST_4`, `MASK_SHOW_FIRST_4`, `MASK_HASH`,
+  `MASK_NULL` and `MASK_DATE_SHOW_YEAR`. The SDK does not check them; the service answers 422 for any other.
+- Refusals: `Conflict` (409) for `row_filter_conflict`, `row_filter_unchecked`, `mask_conflict` and `foreign_policy`,
+  each with its names in `details`. Tag masks and row filters are also a 409 (code `conflict`) when the deployment
+  has tag policies off. `InvalidParameter` is 400 or 422, `NotFound` a tag the catalog does not have.
+- `cidp api` does not list these operations.
 
 ## Command line
 
@@ -148,7 +198,9 @@ make build            # sdist and wheel in dist/
 - `contract/openapi-v1.json` is a copy of the data service's public contract (`services/data/openapi-v1.json` in
   ai-portal-data). `make contract` refreshes it from `../ai-portal-data` (`SERVICE_REPO=...` for another checkout).
 - `_models.py` and `_operations.py` (each operation's method, path, stability and service) are generated from
-  `contract/openapi-v1.json`: run `make sdk-models` and never edit them by hand. `make sdk-models-check` fails when
+  `contract/openapi-v1.json`: run `make sdk-models` and never edit them by hand. `INTERNAL_IN_SDK` in
+  `scripts/sdk_models.py` names the `internal` operations the SDK calls all the same. They go to
+  `INTERNAL_OPERATIONS`, apart from the public `OPERATIONS`, and the models they reach are generated too. `make sdk-models-check` fails when
   they are stale.
 - `tests/test_services.py` fails when a public operation has no method and is not in `NOT_IN_SDK`, when a method
   sends another method or path than its operation, or when `_operations.py` is stale.

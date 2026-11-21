@@ -2,12 +2,14 @@
 
 Reads `contract/openapi-v1.json` and writes `src/cidp_sdk/_models.py`: one pydantic model per
 component schema a ``stable`` or ``preview`` operation reaches (``internal`` ones, the data UI's own, are left out as
-in the reference docs), forward-compatible (unknown fields kept, an enum is `Literal[...] | str`, so a value added within
-v1 does not break an older SDK). Only the JSON Schema the service's pydantic models produce is supported; anything
-else stops the run rather than guessing. It also writes `_operations.py`: each ``stable`` and ``preview`` operation's
-method, path, level and service, which the SDK's services are checked against and which flags a preview call
-(OpenSpec change data-api-consistency, AC-9). `--check` exits 1 when either committed file is stale (the SDK tests do
-the same through `render` and `render_operations`).
+in the reference docs, except those of the few operations in ``INTERNAL_IN_SDK``), forward-compatible (unknown fields
+kept, an enum is `Literal[...] | str`, so a value added within v1 does not break an older SDK). Only the JSON Schema
+the service's pydantic models produce is supported; anything else stops the run rather than guessing. It also writes
+`_operations.py`: each ``stable`` and ``preview`` operation's method, path, level and service, which the SDK's
+services are checked against and which flags a preview call (OpenSpec change data-api-consistency, AC-9), and in
+``INTERNAL_OPERATIONS`` the same for the operations in ``INTERNAL_IN_SDK``, which the SDK calls with a warning
+(``InternalWarning``). `--check` exits 1 when either committed file is stale (the SDK tests do the same through
+`render` and `render_operations`).
 """
 
 from __future__ import annotations
@@ -28,6 +30,10 @@ METHODS = ("get", "put", "post", "delete", "patch")
 REF = "#/components/schemas/"
 # Names a field cannot have on a pydantic model; they get a trailing underscore and the wire name as alias.
 RESERVED = {"schema", "json", "copy", "dict", "validate", "construct", "fields", "model_config", "model_fields"}
+# Internal operations the SDK calls all the same: governance's masks, row filters and governed tags, whose public shape
+# waits for VPFDATA-713 (ai-portal-data routers/v1/governance.py). They may change without notice; the SDK warns.
+INTERNAL_IN_SDK = frozenset({"governance_get", "governance_changes_apply", "governance_changes_preview",
+                             "governance_tags_list"})  # fmt: skip
 KNOWN = {"$ref", "anyOf", "type", "format", "enum", "items", "additionalProperties", "properties", "required",
          "title", "description", "default", "maxLength", "minLength", "maxItems", "minItems", "maximum", "minimum",
          "pattern", "maxProperties", "const"}  # fmt: skip
@@ -115,11 +121,16 @@ def _refs(node: Any) -> set[str]:
     return set()
 
 
+def _in_sdk(op: dict[str, Any]) -> bool:
+    return op.get("x-stability") in ("stable", "preview") or op.get("operationId") in INTERNAL_IN_SDK
+
+
 def public_schemas(doc: dict[str, Any]) -> dict[str, Any]:
-    """The component schemas the ``stable`` and ``preview`` operations reach, through every reference."""
+    """The component schemas the ``stable`` and ``preview`` operations, and those in ``INTERNAL_IN_SDK``, reach,
+    through every reference."""
     schemas = doc["components"]["schemas"]
     ops = [op for item in doc.get("paths", {}).values() for op in item.values() if isinstance(op, dict)]
-    todo = _refs([op for op in ops if op.get("x-stability") in ("stable", "preview")])
+    todo = _refs([op for op in ops if _in_sdk(op)])
     seen: set[str] = set()
     while todo:
         name = todo.pop()
@@ -169,18 +180,25 @@ def render_operations(text: str) -> str:
     doc = json.loads(text)
     digest = hashlib.sha256(text.encode()).hexdigest()
     rows: dict[str, tuple[str, str, str, str]] = {}
+    internal: dict[str, tuple[str, str, str, str]] = {}
     for path, item in doc.get("paths", {}).items():
         for method in METHODS:
             op = item.get(method)
-            if not isinstance(op, dict) or op.get("x-stability") not in ("stable", "preview"):
+            if not isinstance(op, dict) or not _in_sdk(op):
                 continue
-            rows[op["operationId"]] = (method.upper(), path.removeprefix(API), op["x-stability"], op["x-service"])
+            table = rows if op.get("x-stability") in ("stable", "preview") else internal
+            table[op["operationId"]] = (method.upper(), path.removeprefix(API), op["x-stability"], op["x-service"])
+    missing = INTERNAL_IN_SDK - set(internal)
+    if missing:
+        raise ValueError(f"INTERNAL_IN_SDK names operations that are not internal in the contract: {sorted(missing)}")
     lines = [
         f'"""The public operations of the data service\'s API v{doc["info"]["version"]}, generated from openapi-v1.json.',
         "",
         "Do not edit: `make sdk-models` writes this file (scripts/sdk_models.py). operationId -> (method, path under",
         "/api/data/v1, level, service). A ``preview`` operation may change in a minor release; the SDK warns on its",
-        "first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are not here.",
+        "first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are not here, except those in",
+        "``INTERNAL_OPERATIONS``: the SDK calls them all the same and warns (``InternalWarning``); they may change",
+        "without notice.",
         '"""',
         "",
         f"# contract sha256: {digest}",
@@ -188,6 +206,10 @@ def render_operations(text: str) -> str:
         "",
         "OPERATIONS: dict[str, tuple[str, str, str, str]] = {",
         *(f"    {k!r}: {v!r}," for k, v in sorted(rows.items())),
+        "}",
+        "",
+        "INTERNAL_OPERATIONS: dict[str, tuple[str, str, str, str]] = {",
+        *(f"    {k!r}: {v!r}," for k, v in sorted(internal.items())),
         "}",
         "",
     ]

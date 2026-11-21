@@ -5,9 +5,9 @@
     "version": "1",
     "x-service-versions": {
       "admin": "1.2",
-      "audit": "1.3",
+      "audit": "1.4",
       "catalog": "1.11",
-      "governance": "1.11",
+      "governance": "1.12",
       "iceberg": "1.0",
       "ingest": "1.3",
       "jobs": "1.5",
@@ -8743,7 +8743,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -8912,7 +8912,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -9112,7 +9112,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; a privilege on the securable (in the handler)",
         "x-rate-class": "read"
@@ -9249,7 +9249,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write"
@@ -9386,7 +9386,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write",
@@ -9534,7 +9534,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -9746,7 +9746,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE to ask about another person (in the handler)",
         "x-rate-class": "query"
@@ -9910,7 +9910,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10037,7 +10037,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE on the catalog (in the handler)",
         "x-rate-class": "write",
@@ -10193,7 +10193,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10369,7 +10369,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10495,7 +10495,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -10642,7 +10642,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10770,7 +10770,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -10937,7 +10937,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "search"
@@ -11102,7 +11102,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11257,7 +11257,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11397,7 +11397,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11536,7 +11536,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11686,7 +11686,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11851,7 +11851,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12077,7 +12077,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; tables the caller cannot read are hidden (in the handler)",
         "x-rate-class": "read"
@@ -12242,7 +12242,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12424,7 +12424,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12589,7 +12589,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12771,7 +12771,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12953,7 +12953,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13110,7 +13110,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13293,7 +13293,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13462,7 +13462,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13644,7 +13644,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13799,7 +13799,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13982,7 +13982,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14148,7 +14148,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14322,7 +14322,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14449,7 +14449,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14597,7 +14597,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14744,7 +14744,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -26667,7 +26667,7 @@
           "uploads"
         ],
         "summary": "Ingest Uploads Load",
-        "description": "Create or append to a table of one of the workspace's catalogs (the home one when ``catalog`` is not given)\nfrom a staged upload, as the person. A catalog not in the workspace is 404 ``not_found``, one bound read-only 403\n``catalog_read_only``, both before the upload is touched (it stays staged). A file already loaded into this table\nis 409 ``already_loaded`` with the earlier load in ``details.earlier`` unless ``confirm`` is set. The staged copy\ngoes either way.\n\nThe statement runs in a session of the home catalog and writes the three-part target: SQE lets a session read\nonly its own catalog's staging prefix (``ingest/ws/{catalog}/``), where the file was staged\n(data-workspace-catalogs F.1).\n\nStability: preview. Permission: data.view; view on the workspace; as the person: Polaris and Ranger decide (in the handler).",
+        "description": "Create or append to a table of one of the workspace's catalogs (the home one when ``catalog`` is not given)\nfrom a staged upload, as the person. A catalog not in the workspace is 404 ``not_found``, one bound read-only 403\n``catalog_read_only``, both before the upload is touched (it stays staged). A file already loaded into this table\nis 409 ``already_loaded`` with the earlier load in ``details.earlier`` unless ``confirm`` is set; so is one whose\nearlier load's outcome is unknown (``details.earlier.outcome``). The staged copy goes once the outcome is known,\nloaded or refused; a load the engine stopped without a result is 504 ``load_outcome_unknown`` and keeps it.\n\nThe statement runs in a session of the home catalog and writes the three-part target: SQE lets a session read\nonly its own catalog's staging prefix (``ingest/ws/{catalog}/``), where the file was staged\n(data-workspace-catalogs F.1).\n\nStability: preview. Permission: data.view; view on the workspace; as the person: Polaris and Ranger decide (in the handler).",
         "operationId": "ingest_uploads_load",
         "parameters": [
           {
@@ -32878,7 +32878,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33102,7 +33102,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33258,7 +33258,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33426,7 +33426,7 @@
         },
         "x-paged": false,
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read"
@@ -33555,7 +33555,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "write",
@@ -33714,7 +33714,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read"
@@ -33821,7 +33821,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin"
@@ -33947,7 +33947,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -34074,7 +34074,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35753,7 +35753,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35890,7 +35890,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36009,7 +36009,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36135,7 +36135,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36255,7 +36255,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36382,7 +36382,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36509,7 +36509,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "public or key; a lineage producer's key (in the handler)",
         "x-rate-class": "write"
@@ -36650,7 +36650,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "stable",
         "x-permission": "public or key; the audit ingest key and x-portal-audit-schema (in the handler)",
         "x-rate-class": "write"
@@ -36778,7 +36778,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "stable",
         "x-permission": "public or key; the Spark gateway's ingest key and x-portal-audit-schema (in the handler)",
         "x-rate-class": "write"
@@ -38534,7 +38534,7 @@
               }
             ],
             "title": "Catalog",
-            "description": "One of the workspace's catalogs; none: the home catalog"
+            "description": "One of the workspace's catalogs. None on a create: the home catalog; on an update: the catalog of the term's link to this column (422 link_catalog_ambiguous when it links it in several), else the home catalog"
           },
           "namespace": {
             "type": "string",
@@ -40413,6 +40413,51 @@
         ],
         "title": "ExplainOut"
       },
+      "ExportCheck": {
+        "properties": {
+          "seq": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seq"
+          },
+          "hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hash"
+          },
+          "matches": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matches"
+          }
+        },
+        "type": "object",
+        "required": [
+          "seq",
+          "hash",
+          "matches"
+        ],
+        "title": "ExportCheck",
+        "description": "The system tables' last exported audit row against the chain (data-system-tables ST-5). ``matches`` is None\nwhen the chain no longer holds that seq (purged)."
+      },
       "FileUsageList": {
         "properties": {
           "items": {
@@ -40971,7 +41016,7 @@
           "version"
         ],
         "title": "GlossaryTermUpdate",
-        "description": "The whole term, with the ``version`` read (409 ``conflict`` when it changed since)."
+        "description": "The whole term, with the ``version`` read (409 ``conflict`` when it changed since). A link without ``catalog``\nkeeps the catalog of the term's link to that column (422 ``link_catalog_ambiguous`` when the term links it in\nseveral catalogs: name them), and is the home catalog's when the term does not link it yet."
       },
       "GlossaryTerms": {
         "properties": {
@@ -50242,7 +50287,7 @@
           "message"
         ],
         "title": "StatementFailure",
-        "description": "Why a statement failed: ``failed`` (the engine refused it), ``timeout``, ``token_expired``,\n``unauthenticated``, ``replica_lost`` or ``internal``."
+        "description": "Why a statement failed: ``failed`` (the engine refused it), ``timeout``, ``token_expired``,\n``unauthenticated``, ``unavailable`` (the engine could not be reached), ``replica_lost`` or ``internal``."
       },
       "StatementInfo": {
         "properties": {
@@ -51599,7 +51644,8 @@
           },
           "tag": {
             "type": "string",
-            "title": "Tag"
+            "title": "Tag",
+            "description": "The catalog's tag by its bare name (`pii`); another catalog's tag as `<catalog>.<name>`"
           },
           "mask_type": {
             "anyOf": [
@@ -51649,10 +51695,6 @@
           "name": {
             "type": "string",
             "title": "Name"
-          },
-          "tag": {
-            "type": "string",
-            "title": "Tag"
           },
           "description": {
             "type": "string",
@@ -51714,7 +51756,6 @@
         "type": "object",
         "required": [
           "name",
-          "tag",
           "description",
           "mask_type",
           "mask_except",
@@ -51725,7 +51766,7 @@
           "set_at"
         ],
         "title": "TagOut",
-        "description": "A governed tag of the catalog: on a column it is ``<catalog>.<name>`` (data-tag-access)."
+        "description": "A governed tag of the catalog, by its bare name: the catalog it belongs to is the route's (data-tag-access\nTA-13). Ranger and ``sqe.column-tags`` name it ``<catalog>.<name>`` until SQE scopes tag policies itself."
       },
       "TagsOut": {
         "properties": {
@@ -52848,6 +52889,16 @@
               }
             ],
             "title": "Verified At"
+          },
+          "export": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExportCheck"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
