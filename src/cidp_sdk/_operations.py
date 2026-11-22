@@ -7,7 +7,7 @@ first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are 
 without notice.
 """
 
-# contract sha256: 4ef720d7583e2ce65cde4a699c749cdb683bfe2b0a01d705be1f4abcc6c66c9d
+# contract sha256: 6d4ed8db61593c80a5b44ae6c92e086e41ef6c676746cea83baca35367fc1b8c
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
@@ -21,6 +21,7 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'audit_events_get': ('GET', '/audit/events/{event_id}', 'preview', 'audit'),
     'audit_events_list': ('GET', '/audit/events', 'preview', 'audit'),
     'audit_ingest': ('POST', '/audit/ingest/{source}', 'stable', 'audit'),
+    'audit_ingest_storage': ('POST', '/audit/ingest/storage', 'stable', 'audit'),
     'catalogs_bindings_delete': ('DELETE', '/catalogs/{catalog}/bindings/{workspace}', 'stable', 'catalog'),
     'catalogs_bindings_list': ('GET', '/catalogs/{catalog}/bindings', 'stable', 'catalog'),
     'catalogs_bindings_put': ('PUT', '/catalogs/{catalog}/bindings/{workspace}', 'stable', 'catalog'),
@@ -51,9 +52,12 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'glossary_terms_list': ('GET', '/workspaces/{workspace}/glossary/terms', 'preview', 'governance'),
     'glossary_terms_status_update': ('PUT', '/workspaces/{workspace}/glossary/terms/{term_id}/status', 'preview', 'governance'),
     'glossary_terms_update': ('PUT', '/workspaces/{workspace}/glossary/terms/{term_id}', 'preview', 'governance'),
+    'governance_select_coverage': ('GET', '/governance/select-coverage', 'preview', 'governance'),
+    'governance_select_coverage_apply': ('POST', '/governance/select-coverage/apply', 'preview', 'governance'),
     'governance_strays_list': ('GET', '/governance/strays', 'preview', 'governance'),
     'governance_strays_remove': ('POST', '/governance/strays/remove', 'preview', 'governance'),
     'groups_list': ('GET', '/groups', 'preview', 'me'),
+    'identities_delete': ('DELETE', '/identities/{username}', 'preview', 'admin'),
     'ingest_uploads_create': ('POST', '/workspaces/{workspace}/uploads', 'preview', 'ingest'),
     'ingest_uploads_delete': ('DELETE', '/workspaces/{workspace}/uploads/{upload_id}', 'preview', 'ingest'),
     'ingest_uploads_list': ('GET', '/workspaces/{workspace}/uploads', 'preview', 'ingest'),
@@ -137,6 +141,8 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'projects_remote_branches_list': ('GET', '/workspaces/{workspace}/projects/{project}/remote-branches', 'stable', 'projects'),
     'projects_runs_artifact_get': ('GET', '/workspaces/{workspace}/projects/{project}/runs/{run_id}/artifacts/{artifact}', 'stable', 'projects'),
     'projects_runs_cancel': ('POST', '/workspaces/{workspace}/projects/{project}/runs/{run_id}/cancel', 'stable', 'projects'),
+    'projects_runs_docs_ticket': ('POST', '/workspaces/{workspace}/projects/{project}/runs/{run_id}/docs-tickets', 'preview', 'projects'),
+    'projects_runs_docs_view': ('GET', '/docs-view/{ticket}', 'preview', 'projects'),
     'projects_runs_get': ('GET', '/workspaces/{workspace}/projects/{project}/runs/{run_id}', 'stable', 'projects'),
     'projects_runs_list': ('GET', '/workspaces/{workspace}/projects/{project}/runs', 'stable', 'projects'),
     'projects_runs_logs': ('GET', '/workspaces/{workspace}/projects/{project}/runs/{run_id}/logs', 'stable', 'projects'),
@@ -224,6 +230,7 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'workspaces_delete': ('DELETE', '/workspaces/{workspace}', 'stable', 'catalog'),
     'workspaces_get': ('GET', '/workspaces/{workspace}', 'stable', 'catalog'),
     'workspaces_list': ('GET', '/workspaces', 'stable', 'catalog'),
+    'workspaces_run_scope_cap_update': ('PUT', '/workspaces/{workspace}/run-scope-cap', 'preview', 'catalog'),
     'workspaces_storage': ('GET', '/workspaces/{workspace}/storage', 'stable', 'catalog'),
     'workspaces_summary': ('GET', '/workspaces/{workspace}/summary', 'stable', 'catalog'),
     'workspaces_update': ('PATCH', '/workspaces/{workspace}', 'stable', 'catalog'),

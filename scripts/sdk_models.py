@@ -36,7 +36,7 @@ INTERNAL_IN_SDK = frozenset({"governance_get", "governance_changes_apply", "gove
                              "governance_tags_list"})  # fmt: skip
 KNOWN = {"$ref", "anyOf", "type", "format", "enum", "items", "additionalProperties", "properties", "required",
          "title", "description", "default", "maxLength", "minLength", "maxItems", "minItems", "maximum", "minimum",
-         "pattern", "maxProperties", "const"}  # fmt: skip
+         "pattern", "maxProperties", "const", "patternProperties"}  # fmt: skip
 
 
 def _type(s: dict[str, Any]) -> str:
@@ -66,6 +66,11 @@ def _type(s: dict[str, Any]) -> str:
     if t == "array":
         return f"list[{_type(s['items']) if 'items' in s else 'Any'}]"
     if t == "object" or t is None and "additionalProperties" in s:
+        # A map whose keys must match a pattern (a catalog scope: name -> access): the values' type; the service
+        # checks the key, the SDK does not.
+        if "patternProperties" in s and "additionalProperties" not in s:
+            values = " | ".join(dict.fromkeys(_type(v) for v in s["patternProperties"].values()))
+            return f"dict[str, {values or 'Any'}]"
         extra = s.get("additionalProperties", True)
         return f"dict[str, {_type(extra) if isinstance(extra, dict) else 'Any'}]"
     if t is None:

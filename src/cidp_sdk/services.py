@@ -38,6 +38,8 @@ WAIT_INTERVAL = 10.0  # seconds between reads of a run, whatever the change stre
 # Public operations the SDK leaves out on purpose, with the reason (the SDK tests hold this list to the contract).
 NOT_IN_SDK: dict[str, str] = {
     "audit_ingest": "a deployment's audit shipper posts it with its own key, not a person",
+    "audit_ingest_storage": "the object store's access log shipper posts it with the storage ingest key, not a person",
+    "projects_runs_docs_view": "a browser frame opens the ticket's url (no token); Projects.docs_ticket() gets one",
     "spark_audit_ingest": "the Spark gateway posts it with its own key, not a person",
     "lineage_events_ingest": "engines post OpenLineage events with a producer key, not a person",
     "quality_runs_run_all": "a server-sent stream for the quality page; Quality.run() runs a table's checks",
@@ -157,6 +159,13 @@ class Workspaces(_Service):
     @op("workspaces_storage")
     def storage(self, slug: str) -> m.WorkspaceStorageOut:
         return self._http.get(_p("workspaces", slug, "storage"), m.WorkspaceStorageOut)
+
+    @op("workspaces_run_scope_cap_update")
+    def set_run_scope_cap(self, slug: str, cap: str) -> m.RunScopeCapOut:
+        """``data.admin`` only: the widest catalog scope the workspace's admin may give a run (``bindings``,
+        ``listed`` or ``grants``)."""
+        return self._http.send("PUT", _p("workspaces", slug, "run-scope-cap"), m.RunScopeCapOut,
+                               _body(m.RunScopeCapIn, cap=cap))  # fmt: skip
 
 
 class Catalogs(_Service):
@@ -915,6 +924,12 @@ class Projects(_Service):
         """One artifact of a run (dbt's ``run_results``, ``manifest``, ...)."""
         return self._http.get(self._path(slug, project, "runs", run_id, "artifacts", artifact), m.ProjectRunArtifact)
 
+    @op("projects_runs_docs_ticket")
+    def docs_ticket(self, slug: str, project: str, run_id: str) -> m.ProjectDocsTicket:
+        """A one-use ticket for the docs site a ``dbt.docs`` run kept: ``url`` serves it once within a minute, to a
+        frame of the service or the portal, without a token."""
+        return self._http.send("POST", self._path(slug, project, "runs", run_id, "docs-tickets"), m.ProjectDocsTicket)
+
 
 class Jobs(_Service):
     def _path(self, slug: str, project: str, *rest: str) -> str:
@@ -1417,6 +1432,23 @@ class Admin(_Service):
     @op("governance_strays_remove")
     def remove_strays(self, ids: Sequence[int]) -> m.RemovedOut:
         return self._http.send("POST", "/governance/strays/remove", m.RemovedOut, _body(m.StraysRemove, ids=list(ids)))
+
+    @op("governance_select_coverage")
+    def select_coverage(self) -> m.SelectCoverageOut:
+        """Every table a portal user may read that SQE's Ranger ``select`` check would refuse; ``complete`` must be
+        true before SQE's engine identity is turned on."""
+        return self._http.get("/governance/select-coverage", m.SelectCoverageOut)
+
+    @op("governance_select_coverage_apply")
+    def apply_select_coverage(self) -> m.SelectBackfillOut:
+        """Write the compiled ``select`` items of every catalog that lacks them; the answer holds the check after."""
+        return self._http.send("POST", "/governance/select-coverage/apply", m.SelectBackfillOut)
+
+    @op("identities_delete")
+    def remove_identity(self, username: str) -> m.IdentityRemovedOut:
+        """Remove a person who is gone from Keycloak from the data stack (role memberships, Polaris principal, Ranger
+        user, sign-in record); their data and audit stay. Safe to repeat."""
+        return self._http.send("DELETE", _p("identities", username), m.IdentityRemovedOut)
 
     @op("dead_letters_list")
     def dead_letters(self, *, workspace: str | None = None, status: str | None = None,

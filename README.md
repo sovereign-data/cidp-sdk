@@ -67,8 +67,8 @@ with CIDPClient("dev") as client:
 
 - Every `stable` and `preview` operation of the v1 contract is a method of a service on the client:
   `client.workspaces`, `client.tables`, `client.statements`, `client.jobs`, `client.projects` and so on (one per
-  resource). `services.NOT_IN_SDK` names the few left out and why (the machine ingest routes and the quality page's
-  stream). `client.projects.logs(...)` reads a run's log lines as they come; `client.me.events(since=...)` your
+  resource). `services.NOT_IN_SDK` names the few left out and why (the machine ingest routes, the quality page's
+  stream and the docs page a ticket opens in a browser). `client.projects.logs(...)` reads a run's log lines as they come; `client.me.events(since=...)` your
   changes as they commit (`/v1/me/events`, stable), ending at `reset` or `reconnect`.
 - A `preview` operation may still change: its first call in a process warns with `PreviewWarning`. Silence it with
   `warnings.filterwarnings("ignore", category=PreviewWarning)`.
