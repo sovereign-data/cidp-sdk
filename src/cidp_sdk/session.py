@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, Any
 import pyarrow as pa
 
 from cidp_sdk import _models as m
-from cidp_sdk.errors import StatementFailed, WaitTimeout
+from cidp_sdk.errors import OUTCOME_UNKNOWN, OutcomeUnknown, StatementFailed, WaitTimeout
 
 if TYPE_CHECKING:
     import pandas
@@ -60,7 +60,8 @@ class Result:
         return self
 
     def wait(self, timeout: float | None = None) -> Result:
-        """Wait until the statement ends; ``StatementFailed`` unless it succeeded."""
+        """Wait until the statement ends; ``StatementFailed`` unless it succeeded (``OutcomeUnknown`` for a write whose
+        outcome is unknown)."""
         deadline = None if timeout is None else time.monotonic() + timeout
         while self.state in OPEN:
             left = POLL if deadline is None else min(POLL, max(0, int(deadline - time.monotonic())))
@@ -69,6 +70,9 @@ class Result:
             self.refresh(wait_timeout=left)
         if self.state != "SUCCEEDED":
             error = self.info.error
+            if error and error.code in OUTCOME_UNKNOWN:
+                # A write whose outcome is unknown: never submitted again here; check before you repeat it.
+                raise OutcomeUnknown(error.message, code=error.code, cause=error.cause)
             raise StatementFailed(
                 error.message if error else f"Statement {self.id} ended {self.state}",
                 code=(error.code if error else self.state.lower()),

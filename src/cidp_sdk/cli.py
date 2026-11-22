@@ -42,10 +42,12 @@ from cidp_sdk._http import raw_body
 from cidp_sdk._operations import OPERATIONS
 from cidp_sdk.client import CIDPClient
 from cidp_sdk.errors import (
+    OUTCOME_UNKNOWN,
     CIDPError,
     ConfigError,
     Conflict,
     NotFound,
+    OutcomeUnknown,
     PermissionDenied,
     StatementFailed,
     TooManyRequests,
@@ -55,7 +57,7 @@ from cidp_sdk.errors import (
 # Exit codes per error class (design C3), for scripts; 2 is typer's for a usage error, 130 an interrupt.
 EXIT: dict[type[CIDPError], int] = {
     ConfigError: 3, Unauthenticated: 4, PermissionDenied: 5, NotFound: 6, Conflict: 7, TooManyRequests: 8,
-    StatementFailed: 9,
+    StatementFailed: 9, OutcomeUnknown: 10,
 }  # fmt: skip
 JOB_OPEN = ("waiting", "queued", "running")
 TABLE_ROWS = 1000  # rows a table on the terminal shows; csv and jsonl stream every row
@@ -454,6 +456,9 @@ def _job_run_done(client: CIDPClient, state: State, slug: str, project: str, job
         run = client.jobs.wait_run(slug, project, job, run.run_id, interval=poll)
     emit_one(state, {k: v for k, v in _plain(run).items() if k != "tasks"})
     if wait and run.status != "succeeded":
+        if run.error_code in OUTCOME_UNKNOWN:
+            _fail(OutcomeUnknown(f"Run {run.number} ended {run.status}: a write may or may not have happened; "
+                                 "check before you run it again.", code=run.error_code))  # fmt: skip
         err.print(f"Run {run.number} ended {run.status}.", markup=False)
         raise typer.Exit(9)
 
