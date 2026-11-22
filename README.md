@@ -184,7 +184,8 @@ cidp events --since <id>                 # your changes as they commit, until Ct
 - `--output` (`-o`): `table` (default, at most 1,000 rows), `json`, `jsonl` or `csv`. Results go to stdout; notes
   and errors go to stderr.
 - Exit codes: 2 usage, 3 configuration, 4 not signed in, 5 permission denied, 6 not found, 7 conflict, 8 too many
-  requests, 9 statement or job run failed, 130 interrupted. Exit 2 is also an unconfirmed `DELETE` without a
+  requests, 9 statement or job run failed, 10 outcome unknown (a write may or may not have happened: check before
+  you repeat it), 130 interrupted. Exit 2 is also an unconfirmed `DELETE` without a
   terminal.
 - There is no option for a token or secret. Use `CIDP_TOKEN`, `CIDP_CLIENT_SECRET` or `cidp login`.
 - Exit code 1: the command ran but what it asked for did not happen (a deploy with errors, an upload not staged or

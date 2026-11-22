@@ -16,6 +16,7 @@ from cidp_sdk.errors import (  # noqa: E402
     InternalWarning,
     InvalidParameter,
     NotFound,
+    OutcomeUnknown,
     PermissionDenied,
     PreviewWarning,
     StatementFailed,
@@ -24,12 +25,13 @@ from cidp_sdk.errors import (  # noqa: E402
     Unauthenticated,
     Unavailable,
     WaitTimeout,
+    raise_for_outcome,
 )
 from cidp_sdk.session import Result, Session  # noqa: E402
 
 __all__ = [
     "ConfigError", "Conflict", "InvalidParameter", "NotFound", "PermissionDenied", "CIDPClient", "CIDPError",
-    "InternalWarning", "PreviewWarning",
+    "InternalWarning", "OutcomeUnknown", "PreviewWarning",
     "Result", "Session", "StatementFailed", "TooManyRequests", "TransportError", "Unauthenticated", "Unavailable",
-    "WaitTimeout", "__version__",
+    "WaitTimeout", "__version__", "raise_for_outcome",
 ]  # fmt: skip

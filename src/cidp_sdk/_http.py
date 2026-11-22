@@ -12,7 +12,7 @@ import httpx
 from pydantic import BaseModel
 
 from cidp_sdk import __version__
-from cidp_sdk.errors import BY_STATUS, CIDPError, TooManyRequests, TransportError
+from cidp_sdk.errors import BY_STATUS, OUTCOME_UNKNOWN, CIDPError, OutcomeUnknown, TooManyRequests, TransportError
 
 API = "/api/data/v1"
 T = TypeVar("T", bound=BaseModel)
@@ -90,9 +90,13 @@ def _error(method: str, path: str, r: httpx.Response, request_id: str) -> CIDPEr
     # The service's message is written for people; a message that quotes a token is replaced, never shown.
     if not message or redact(message) != message:
         message = f"{method} {API}{path}: HTTP {r.status_code}"
-    cls = BY_STATUS.get(r.status_code, CIDPError)
+    # outcome_unknown goes by its code, whatever the status (504 today): it is never a plain 5xx to try again.
+    cls = OutcomeUnknown if code in OUTCOME_UNKNOWN else BY_STATUS.get(r.status_code, CIDPError)
     kw: dict[str, Any] = {"code": code, "status": r.status_code, "request_id": rid,
                           "details": details if isinstance(details, dict) else None}  # fmt: skip
+    if cls is OutcomeUnknown:
+        cause = kw["details"].get("cause") if kw["details"] else None
+        kw["cause"] = cause if isinstance(cause, str) else None
     if cls is TooManyRequests:
         try:
             kw["retry_after"] = float(r.headers["retry-after"])

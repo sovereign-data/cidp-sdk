@@ -87,6 +87,35 @@ class StatementFailed(CIDPError):
     """A statement ended ``FAILED`` or ``CANCELED``; ``code`` is the statement's own (``failed``, ``timeout``…)."""
 
 
+class OutcomeUnknown(CIDPError):
+    """``outcome_unknown`` (sql and jobs 1.7, data-outcome-unknown): a write was sent and its answer was lost, it ran
+    out of time, or the service stopped while it ran. It may or may not have happened: check before you repeat it.
+    ``cause`` is the service's reason when it gave one (``lost_answer``, ``timeout``, ``replica_lost``).
+
+    Raised for a 504 with this code on a synchronous call, a statement that ended ``FAILED`` with it, and a run
+    whose ``error_code`` names it (``raise_for_outcome``). The SDK never sends the request again on it, as it never
+    retries any call; unlike ``unavailable``, ``timeout`` or ``replica_lost``, it is not safe to repeat blindly."""
+
+    def __init__(self, message: str, *, cause: str | None = None, **kw: Any):
+        super().__init__(message, **kw)
+        self.cause = cause
+
+
+# The codes that mean "the write may or may not have happened": the statement and job code, and ingest's load.
+OUTCOME_UNKNOWN: frozenset[str] = frozenset({"outcome_unknown", "load_outcome_unknown"})
+
+
+def raise_for_outcome(run: Any) -> Any:
+    """Raise ``OutcomeUnknown`` when a job or project run ended with ``error_code`` ``outcome_unknown``; otherwise
+    return the run. ``wait_run`` returns a run whatever its result, so a caller that would run it again checks here."""
+    code = getattr(run, "error_code", None)
+    if code in OUTCOME_UNKNOWN:
+        what = f"Run {getattr(run, 'run_id', '?')}"
+        raise OutcomeUnknown(f"{what} ended {getattr(run, 'status', '?')}: a write may or may not have happened; "
+                             "check before you run it again", code=code)  # fmt: skip
+    return run
+
+
 BY_STATUS: dict[int, type[CIDPError]] = {
     400: InvalidParameter,
     401: Unauthenticated,
