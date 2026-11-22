@@ -4,19 +4,19 @@
     "title": "AI Portal data API",
     "version": "1",
     "x-service-versions": {
-      "admin": "1.2",
-      "audit": "1.4",
-      "catalog": "1.11",
-      "governance": "1.12",
+      "admin": "1.3",
+      "audit": "1.5",
+      "catalog": "1.12",
+      "governance": "1.23",
       "iceberg": "1.0",
       "ingest": "1.3",
-      "jobs": "1.5",
+      "jobs": "1.8",
       "me": "1.8",
       "notifications": "1.2",
-      "projects": "1.6",
+      "projects": "1.8",
       "secrets": "1.3",
-      "sql": "1.6",
-      "system": "1.4"
+      "sql": "1.7",
+      "system": "1.5"
     }
   },
   "paths": {
@@ -139,7 +139,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "stable",
         "x-permission": "public or key",
         "x-rate-class": "read",
@@ -286,7 +286,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "internal",
         "x-permission": "public or key",
         "x-rate-class": "read",
@@ -483,7 +483,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view",
         "x-rate-class": "read",
@@ -621,7 +621,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -778,7 +778,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; a workspace the caller can see (in the handler)",
         "x-rate-class": "read",
@@ -924,7 +924,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -1052,12 +1052,141 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
         "x-audit-action": "workspace.deleted",
         "description": "Stability: stable. Permission: data.admin."
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/run-scope-cap": {
+      "put": {
+        "tags": [
+          "workspaces"
+        ],
+        "summary": "Workspaces Run Scope Cap Update",
+        "description": "``data.admin`` only (data-run-catalog-scope D3): the widest catalog scope the workspace's admin may give a run.\n``bindings`` (the default) allows no widening, ``listed`` adds named catalogs, ``grants`` every catalog the\nperson's grants reach. A workspace's admin cannot raise their own cap. Jobs are checked against it at each task\nstart, so lowering it stops a widened job's next task.\n\nStability: preview. Permission: data.admin.",
+        "operationId": "workspaces_run_scope_cap_update",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunScopeCapIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunScopeCapOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "catalog",
+        "x-service-version": "1.12",
+        "x-stability": "preview",
+        "x-permission": "data.admin",
+        "x-rate-class": "admin",
+        "x-audit-action": "data.workspace.run_scope_cap"
       }
     },
     "/api/data/v1/workspaces/adopt/preview": {
@@ -1171,7 +1300,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.admin",
         "x-rate-class": "admin"
@@ -1288,7 +1417,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "internal",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -1459,7 +1588,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -1605,7 +1734,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; data.admin or the workspace's admin group (in the handler)",
         "x-rate-class": "write",
@@ -1767,7 +1896,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -1905,7 +2034,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -2037,7 +2166,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; data.admin or MANAGE on the catalog",
         "x-rate-class": "write",
@@ -2190,7 +2319,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -2335,7 +2464,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; data.admin or MANAGE on the catalog",
         "x-rate-class": "write",
@@ -2506,7 +2635,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -2644,7 +2773,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; data.admin or MANAGE on the catalog",
         "x-rate-class": "write",
@@ -2762,7 +2891,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; data.admin or MANAGE on the catalog",
         "x-rate-class": "write",
@@ -2919,7 +3048,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "search"
@@ -3074,7 +3203,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "search"
@@ -3235,7 +3364,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin"
@@ -3372,7 +3501,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -3501,7 +3630,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -3612,7 +3741,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -3792,7 +3921,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -3948,7 +4077,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -4124,7 +4253,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -4289,7 +4418,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -4480,7 +4609,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -4682,7 +4811,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -4839,7 +4968,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -5131,7 +5260,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -5314,7 +5443,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query"
@@ -5476,7 +5605,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -5674,7 +5803,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -5863,7 +5992,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -6046,7 +6175,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -6195,7 +6324,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -6375,7 +6504,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -6502,7 +6631,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -6702,7 +6831,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -6820,7 +6949,7 @@
         },
         "x-paged": false,
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view",
         "x-rate-class": "read",
@@ -6959,7 +7088,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -7088,7 +7217,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -7237,7 +7366,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -7366,7 +7495,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -7556,7 +7685,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -7665,7 +7794,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query"
@@ -7785,7 +7914,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query",
@@ -7956,7 +8085,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -8082,7 +8211,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; sharing needs operate (in the handler)",
         "x-rate-class": "query",
@@ -8249,7 +8378,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -8423,7 +8552,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; owner or data.admin; sharing needs operate (in the handler)",
         "x-rate-class": "query",
@@ -8562,7 +8691,7 @@
           }
         },
         "x-service": "sql",
-        "x-service-version": "1.6",
+        "x-service-version": "1.7",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; owner or data.admin (in the handler)",
         "x-rate-class": "query",
@@ -8743,7 +8872,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -8912,7 +9041,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -9112,7 +9241,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; a privilege on the securable (in the handler)",
         "x-rate-class": "read"
@@ -9249,7 +9378,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write"
@@ -9386,7 +9515,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write",
@@ -9534,10 +9663,603 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/catalogs/{catalog}/governance/column-tags": {
+      "post": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Column Tags",
+        "description": "Tag or untag a column as the caller, as Unity Catalog's ``SET TAGS``: the portal runs the statement on SQE with\nthe caller's token, and SQE checks APPLY TAG on the column (data-tag-access TA9-2). One of ``add`` and ``remove``;\n``values`` gives a tag being added its value, by bare name: a tag with allowed values takes one of them and needs\none (422 ``tag_value``, #632). The column's tags after, by their bare names, and their values.\n\nStability: internal. Permission: data.view; view on the workspace; APPLY TAG on the column, checked by SQE as the caller (in the handler).",
+        "operationId": "governance_column_tags",
+        "parameters": [
+          {
+            "name": "catalog",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Catalog"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ColumnTagsIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnTagsOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "internal",
+        "x-permission": "data.view; view on the workspace; APPLY TAG on the column, checked by SQE as the caller (in the handler)",
+        "x-rate-class": "write",
+        "x-audit-action": "data.governance.column_tag"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/catalogs/{catalog}/governance/tag-assignments": {
+      "get": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Tag Assignments List",
+        "description": "The governed tags assigned in the portal's store on the catalog, a schema, or a table or view and its columns\n(data-tag-inheritance TI-1). ``enforced`` is false: no engine reads them yet.\n\nStability: internal. Permission: data.view; view on the workspace.",
+        "operationId": "governance_tag_assignments_list",
+        "parameters": [
+          {
+            "name": "catalog",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Catalog"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Schema"
+            }
+          },
+          {
+            "name": "table",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Table"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated fields to return: of each item of a list, or of the object. An unknown field is 400 invalid_parameter (data-api-consistency C19)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagAssignmentsOut"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-paged": false,
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "internal",
+        "x-permission": "data.view; view on the workspace",
+        "x-rate-class": "read"
+      },
+      "post": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Tag Assignments",
+        "description": "Assign tags to a catalog, schema, table, view or column, or remove them, in the portal's store (TI-2). Needs\nAPPLY TAG on the object (inherited from its schema and catalog), MANAGE or ownership, checked by the portal (403\n``apply_tag``); another catalog's tag is 409 ``foreign_tag``; a value outside the tag's allowed values is 422\n``tag_value``. Nothing is written to an engine. The object's assignments after.\n\nStability: internal. Permission: data.view; view on the workspace; APPLY TAG on the object, MANAGE or ownership, checked by the portal (in the handler).",
+        "operationId": "governance_tag_assignments",
+        "parameters": [
+          {
+            "name": "catalog",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Catalog"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagAssignmentsIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagAssignmentsOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "internal",
+        "x-permission": "data.view; view on the workspace; APPLY TAG on the object, MANAGE or ownership, checked by the portal (in the handler)",
+        "x-rate-class": "write",
+        "x-audit-action": "data.governance.tag_assign"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/catalogs/{catalog}/governance/tag-assignments/import": {
+      "post": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Tag Assignments Import",
+        "description": "Import a dbx-migrator bundle's Unity tags (data-tag-inheritance TI-6), never wider: a line is assigned only\nfor a defined tag of this catalog with a value it allows, on an object the caller may tag (APPLY TAG, MANAGE or\nownership); a mask is set only with a portal mask type (MANAGE). Everything else (another catalog, a volume or\nfunction, an unknown tag, a value not allowed, an object the caller cannot see or tag, two values for one tag, a\nfunction mask, a grant by tag, a value-only policy) is reported by reason, tag key and count, never by value.\nChecked before anything is written; Polaris unavailable refuses all of it. A re-run changes nothing.\n\nStability: internal. Permission: data.view; view on the workspace; APPLY TAG on each object, MANAGE or ownership, checked by the portal; MANAGE for a mask (in the handler).",
+        "operationId": "governance_tag_assignments_import",
+        "parameters": [
+          {
+            "name": "catalog",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Catalog"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagImportIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagImportOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "internal",
+        "x-permission": "data.view; view on the workspace; APPLY TAG on each object, MANAGE or ownership, checked by the portal; MANAGE for a mask (in the handler)",
+        "x-rate-class": "write",
+        "x-audit-action": "data.governance.tag_import"
       }
     },
     "/api/data/v1/workspaces/{workspace}/catalogs/{catalog}/governance/explain": {
@@ -9746,7 +10468,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE to ask about another person (in the handler)",
         "x-rate-class": "query"
@@ -9910,7 +10632,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10037,7 +10759,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE on the catalog (in the handler)",
         "x-rate-class": "write",
@@ -10193,7 +10915,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10369,7 +11091,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10495,7 +11217,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -10642,7 +11364,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10770,7 +11492,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -10937,7 +11659,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "search"
@@ -11102,7 +11824,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11257,7 +11979,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11397,7 +12119,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11536,7 +12258,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11686,7 +12408,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11851,7 +12573,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12077,7 +12799,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; tables the caller cannot read are hidden (in the handler)",
         "x-rate-class": "read"
@@ -12242,7 +12964,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12424,7 +13146,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12589,7 +13311,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12771,7 +13493,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12953,7 +13675,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13110,7 +13832,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13293,7 +14015,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13462,7 +14184,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13644,7 +14366,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13799,7 +14521,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13982,7 +14704,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14148,7 +14870,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14322,7 +15044,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14449,7 +15171,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14597,7 +15319,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14744,7 +15466,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14914,7 +15636,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -15061,7 +15783,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; the owner group is one of the workspace's groups the caller is in (in the handler)",
         "x-rate-class": "write",
@@ -15191,7 +15913,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -15356,7 +16078,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -15505,7 +16227,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -15665,7 +16387,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -15800,7 +16522,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -15989,7 +16711,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16124,7 +16846,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -16285,7 +17007,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -16444,7 +17166,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16615,7 +17337,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16761,7 +17483,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; the action's privilege on the project (in the handler)",
         "x-rate-class": "query",
@@ -16958,7 +17680,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -17132,7 +17854,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW, or CAN VIEW on a job whose task ran it (in the handler)",
         "x-rate-class": "read"
@@ -17315,10 +18037,148 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; as the run (in the handler)",
         "x-rate-class": "read"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/projects/{project}/runs/{run_id}/docs-tickets": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Projects Runs Docs Ticket",
+        "description": "As the run. A ticket for the docs site a ``dbt.docs`` run kept: ``url`` serves it once within a minute, to a\nframe (``sandbox=\"allow-scripts\"``) of this service or the portal, without the caller's token. Audited as a view\nof the docs. 404 when the run kept no site.\n\nStability: preview. Permission: data.view; view on the workspace; as the run (in the handler).",
+        "operationId": "projects_runs_docs_ticket",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Project"
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDocsTicket"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "projects",
+        "x-service-version": "1.8",
+        "x-stability": "preview",
+        "x-permission": "data.view; view on the workspace; as the run (in the handler)",
+        "x-rate-class": "write",
+        "x-audit-action": "data.projects.run.docs.view"
       }
     },
     "/api/data/v1/workspaces/{workspace}/projects/{project}/runs/{run_id}/cancel": {
@@ -17452,7 +18312,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; who started it, or CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -17612,7 +18472,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; as the run (in the handler)",
         "x-rate-class": "read"
@@ -17759,7 +18619,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -17896,7 +18756,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -18034,7 +18894,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -18172,7 +19032,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -18332,7 +19192,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -18496,7 +19356,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -18650,7 +19510,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -18826,7 +19686,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query"
@@ -18963,7 +19823,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN (in the handler)",
         "x-rate-class": "write",
@@ -19109,7 +19969,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW; the caller's own (in the handler)",
         "x-rate-class": "read"
@@ -19256,7 +20116,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -19394,7 +20254,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write"
@@ -19524,7 +20384,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; the kernel's owner (in the handler)",
         "x-rate-class": "write"
@@ -19678,7 +20538,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -19809,7 +20669,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -19982,7 +20842,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read",
@@ -20120,7 +20980,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW; document updates CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -20316,7 +21176,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -20507,7 +21367,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -20714,7 +21574,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -20878,7 +21738,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write"
@@ -21051,7 +21911,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -21227,7 +22087,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -21390,7 +22250,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write",
@@ -21579,7 +22439,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21763,7 +22623,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21910,7 +22770,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -22078,7 +22938,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE RUN (in the handler)",
         "x-rate-class": "write",
@@ -22245,7 +23105,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -22399,7 +23259,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -22544,7 +23404,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -22689,7 +23549,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -22853,7 +23713,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -23007,7 +23867,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -23151,7 +24011,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -23288,7 +24148,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -23425,7 +24285,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT on the project (in the handler)",
         "x-rate-class": "write",
@@ -23563,7 +24423,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -23751,7 +24611,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -23938,7 +24798,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -24111,7 +24971,7 @@
         },
         "x-paged": false,
         "x-service": "jobs",
-        "x-service-version": "1.5",
+        "x-service-version": "1.8",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -24306,7 +25166,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view",
         "x-rate-class": "search"
@@ -24462,7 +25322,7 @@
         },
         "x-paged": false,
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; a privilege on the volume (in the handler)",
         "x-rate-class": "read"
@@ -24606,7 +25466,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; a workspace operator (in the handler)",
         "x-rate-class": "write",
@@ -24788,7 +25648,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; a privilege on the volume (in the handler)",
         "x-rate-class": "read",
@@ -24956,7 +25816,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -25135,7 +25995,7 @@
         },
         "x-paged": false,
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; READ VOLUME (in the handler)",
         "x-rate-class": "read",
@@ -25311,7 +26171,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; WRITE VOLUME; scanned before it is stored (in the handler)",
         "x-rate-class": "ingest",
@@ -25459,7 +26319,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; WRITE VOLUME (in the handler)",
         "x-rate-class": "write",
@@ -25626,7 +26486,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; READ VOLUME (in the handler)",
         "x-rate-class": "read",
@@ -25809,7 +26669,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; a privilege on the volume (in the handler)",
         "x-rate-class": "read"
@@ -25981,7 +26841,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -26175,7 +27035,7 @@
           }
         },
         "x-service": "catalog",
-        "x-service-version": "1.11",
+        "x-service-version": "1.12",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -26667,7 +27527,7 @@
           "uploads"
         ],
         "summary": "Ingest Uploads Load",
-        "description": "Create or append to a table of one of the workspace's catalogs (the home one when ``catalog`` is not given)\nfrom a staged upload, as the person. A catalog not in the workspace is 404 ``not_found``, one bound read-only 403\n``catalog_read_only``, both before the upload is touched (it stays staged). A file already loaded into this table\nis 409 ``already_loaded`` with the earlier load in ``details.earlier`` unless ``confirm`` is set; so is one whose\nearlier load's outcome is unknown (``details.earlier.outcome``). The staged copy goes once the outcome is known,\nloaded or refused; a load the engine stopped without a result is 504 ``load_outcome_unknown`` and keeps it.\n\nThe statement runs in a session of the home catalog and writes the three-part target: SQE lets a session read\nonly its own catalog's staging prefix (``ingest/ws/{catalog}/``), where the file was staged\n(data-workspace-catalogs F.1).\n\nStability: preview. Permission: data.view; view on the workspace; as the person: Polaris and Ranger decide (in the handler).",
+        "description": "Create or append to a table of one of the workspace's catalogs (the home one when ``catalog`` is not given)\nfrom a staged upload, as the person. A catalog not in the workspace is 404 ``not_found``, one bound read-only 403\n``catalog_read_only``, both before the upload is touched (it stays staged). A file already loaded into this table\nis 409 ``already_loaded`` with the earlier load in ``details.earlier`` unless ``confirm`` is set; so is one whose\nearlier load's outcome is unknown (``details.earlier.outcome``). The staged copy goes once the outcome is known,\nloaded or refused; a load the engine stopped without a result, or whose answer was lost after the send, is 504\n``load_outcome_unknown`` and keeps it. A connection to the engine that never opened sent nothing: 503 ``unavailable``.\n\nThe statement runs in a session of the home catalog and writes the three-part target: SQE lets a session read\nonly its own catalog's staging prefix (``ingest/ws/{catalog}/``), where the file was staged\n(data-workspace-catalogs F.1).\n\nStability: preview. Permission: data.view; view on the workspace; as the person: Polaris and Ranger decide (in the handler).",
         "operationId": "ingest_uploads_load",
         "parameters": [
           {
@@ -32048,7 +32908,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; everyone's for operators (in the handler)",
         "x-rate-class": "read"
@@ -32169,7 +33029,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; anyone's for operators (in the handler)",
         "x-rate-class": "write",
@@ -32298,7 +33158,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -32427,7 +33287,7 @@
           }
         },
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -32612,7 +33472,7 @@
         },
         "x-paged": false,
         "x-service": "system",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; everyone's for operators (in the handler)",
         "x-rate-class": "read"
@@ -32878,7 +33738,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33102,7 +33962,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33258,7 +34118,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read",
@@ -33426,7 +34286,7 @@
         },
         "x-paged": false,
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read"
@@ -33555,7 +34415,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "write",
@@ -33714,7 +34574,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.view; data.admin for every workspace, else the workspaces the caller operates (in the handler)",
         "x-rate-class": "read"
@@ -33821,7 +34681,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin"
@@ -33947,7 +34807,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -34074,7 +34934,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -34230,7 +35090,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -34349,11 +35209,133 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
         "x-audit-action": "data.subject.erase"
+      }
+    },
+    "/api/data/v1/identities/{username}": {
+      "delete": {
+        "tags": [
+          "identities"
+        ],
+        "summary": "Identities Delete",
+        "description": "Remove a person who is gone from Keycloak from the data stack: their Ranger role memberships, Polaris principal,\nRanger user and sign-in record (audited). Only a person this service provisioned; safe to repeat. The person's data,\naudit events and ownership are left (erasure is ``/subjects/{subject}/erase``).\n\nStability: preview. Permission: data.admin.",
+        "operationId": "identities_delete",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255,
+              "pattern": "^[^/\\\\\\x00-\\x1f]+$",
+              "title": "Username"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityRemovedOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "admin",
+        "x-service-version": "1.3",
+        "x-stability": "preview",
+        "x-permission": "data.admin",
+        "x-rate-class": "admin",
+        "x-audit-action": "data.identity.deprovision"
       }
     },
     "/api/data/v1/events/dead-letters": {
@@ -34523,7 +35505,7 @@
         },
         "x-paged": false,
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -34636,7 +35618,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35001,7 +35983,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.6",
+        "x-service-version": "1.8",
         "x-stability": "preview",
         "x-permission": "data.view",
         "x-rate-class": "read",
@@ -35139,7 +36121,7 @@
         },
         "x-paged": false,
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35265,7 +36247,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin; data.view",
         "x-rate-class": "admin",
@@ -35395,7 +36377,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin; data.view",
         "x-rate-class": "admin",
@@ -35506,7 +36488,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35626,7 +36608,7 @@
           }
         },
         "x-service": "admin",
-        "x-service-version": "1.2",
+        "x-service-version": "1.3",
         "x-stability": "preview",
         "x-permission": "data.admin; data.view",
         "x-rate-class": "admin",
@@ -35753,7 +36735,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -35890,11 +36872,266 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
         "x-audit-action": "data.governance.strays.remove"
+      }
+    },
+    "/api/data/v1/governance/select-coverage": {
+      "get": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Select Coverage",
+        "description": "Every table a portal user may read that SQE's Ranger `select` check would refuse them (#734), from the hive\nservice's enabled access policies as SQE evaluates them. Run before SQE's engine identity is turned on; it must\nsay `complete`. The platform admin roles and the samples and system catalogs are granted outside the governance\nstore and are listed apart. Reads names only, never data.\n\nStability: preview. Permission: data.admin.",
+        "operationId": "governance_select_coverage",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectCoverageOut"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The resource's tag (weak with fields)."
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified: the resource still has the tag asked about",
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The resource's tag (weak with fields)."
+              }
+            }
+          }
+        },
+        "x-paged": false,
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "preview",
+        "x-permission": "data.admin",
+        "x-rate-class": "admin",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated fields to return: of each item of a list, or of the object. An unknown field is 400 invalid_parameter (data-api-consistency C19)."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A tag from an earlier read: 304 with no body while the resource still has it (weak comparison; data-api-consistency C18.4)."
+          }
+        ]
+      }
+    },
+    "/api/data/v1/governance/select-coverage/apply": {
+      "post": {
+        "tags": [
+          "governance"
+        ],
+        "summary": "Governance Select Coverage Apply",
+        "description": "Write the compiled `select` items of every catalog that lacks them (audited): each such catalog's governance is\napplied as on a grant change. 409 while PORTAL_DATA_RANGER_SELECT is off. Answers the check as it is after.\n\nStability: preview. Permission: data.admin.",
+        "operationId": "governance_select_coverage_apply",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectBackfillOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            }
+          }
+        },
+        "x-service": "governance",
+        "x-service-version": "1.23",
+        "x-stability": "preview",
+        "x-permission": "data.admin",
+        "x-rate-class": "admin",
+        "x-audit-action": "data.governance.select.backfill"
       }
     },
     "/api/data/v1/lineage/producers": {
@@ -36009,7 +37246,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36135,7 +37372,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36255,7 +37492,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36382,7 +37619,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36509,10 +37746,138 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.12",
+        "x-service-version": "1.23",
         "x-stability": "stable",
         "x-permission": "public or key; a lineage producer's key (in the handler)",
         "x-rate-class": "write"
+      }
+    },
+    "/api/data/v1/audit/ingest/storage": {
+      "post": {
+        "tags": [
+          "audit"
+        ],
+        "summary": "Audit Ingest Storage",
+        "description": "The object store's access records (one per request, or up to 5,000) with the storage ingest key. New records are\nfolded per minute and join the audit chain as data.storage.access once the minute closes; repeats are counted as\nduplicates, unreadable ones as skipped; a store failure is 503, so the store's queue retries.\n\nStability: stable. Permission: public or key; the storage audit ingest key (in the handler).",
+        "operationId": "audit_ingest_storage",
+        "parameters": [
+          {
+            "name": "x-portal-audit-schema",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 16
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional here: the object store's webhook sends no custom header. When sent it must be 1.",
+              "title": "X-Portal-Audit-Schema"
+            },
+            "description": "Optional here: the object store's webhook sends no custom header. When sent it must be 1."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditIngestOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "audit",
+        "x-service-version": "1.5",
+        "x-stability": "stable",
+        "x-permission": "public or key; the storage audit ingest key (in the handler)",
+        "x-rate-class": "search"
       }
     },
     "/api/data/v1/audit/ingest/{source}": {
@@ -36650,7 +38015,7 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "stable",
         "x-permission": "public or key; the audit ingest key and x-portal-audit-schema (in the handler)",
         "x-rate-class": "write"
@@ -36778,10 +38143,140 @@
           }
         },
         "x-service": "audit",
-        "x-service-version": "1.4",
+        "x-service-version": "1.5",
         "x-stability": "stable",
         "x-permission": "public or key; the Spark gateway's ingest key and x-portal-audit-schema (in the handler)",
         "x-rate-class": "write"
+      }
+    },
+    "/api/data/v1/docs-view/{ticket}": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Projects Runs Docs View",
+        "description": "A ticket from ``\u2026/runs/{run_id}/docs-tickets``, no token. The run's docs site, once: the ticket is spent here, and\nan unknown, spent or expired one is 404.\n\nStability: preview. Permission: public or key; a docs ticket: one run, one use, a minute (in the handler).",
+        "operationId": "projects_runs_docs_view",
+        "parameters": [
+          {
+            "name": "ticket",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Ticket"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated fields to return: of each item of a list, or of the object. An unknown field is 400 invalid_parameter (data-api-consistency C19)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The docs site, sandboxed: scripts only, nothing from the network, framed only by this service and the portal",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "projects",
+        "x-service-version": "1.8",
+        "x-stability": "preview",
+        "x-permission": "public or key; a docs ticket: one run, one use, a minute (in the handler)",
+        "x-rate-class": "read"
       }
     }
   },
@@ -37677,6 +39172,74 @@
         ],
         "title": "Alerts"
       },
+      "AssignedTagOut": {
+        "properties": {
+          "column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Column"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag",
+            "description": "The catalog's tag by its bare name"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "column",
+              "table",
+              "schema",
+              "catalog"
+            ],
+            "title": "Source",
+            "description": "Where the tag is assigned"
+          },
+          "mask_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mask Type",
+            "description": "The tag's mask, which would apply if an engine enforced it"
+          },
+          "enforcement": {
+            "type": "string",
+            "const": "not_enforced",
+            "title": "Enforcement",
+            "description": "Assignments in the portal's store classify; no engine reads them yet",
+            "default": "not_enforced"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tag",
+          "source"
+        ],
+        "title": "AssignedTagOut",
+        "description": "A tag of the portal's store as it reaches the object or one of its columns (data-tag-inheritance TI-3): its\nown, or inherited from the table, schema or catalog, the nearest value winning. Never enforced: no engine reads\nthe store (TI-4), so its mask does not apply here; the tags SQE applies are in `tags`."
+      },
       "AuditEvents": {
         "properties": {
           "items": {
@@ -37743,6 +39306,175 @@
           "skipped"
         ],
         "title": "AuditIngestOut"
+      },
+      "BundleEntryOut": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "object": {
+            "type": "string",
+            "title": "Object"
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group"
+          },
+          "privilege": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Privilege"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "action",
+          "object"
+        ],
+        "title": "BundleEntryOut"
+      },
+      "BundlePolicyIn": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "grant_by_tag",
+              "value_policy",
+              "function_mask"
+            ],
+            "title": "Kind"
+          },
+          "tag": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Tag"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "tag"
+        ],
+        "title": "BundlePolicyIn",
+        "description": "A tag policy the migrator found and the portal does not import: reported by kind and key."
+      },
+      "BundleTagIn": {
+        "properties": {
+          "securable": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "title": "Securable",
+            "examples": [
+              "column:ms-eu/main.sales.orders.email"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Key"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1024
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "securable",
+          "key"
+        ],
+        "title": "BundleTagIn",
+        "description": "One line of a dbx-migrator bundle's ``model/governance/tags.jsonl``."
+      },
+      "BundleTagMaskIn": {
+        "properties": {
+          "mask": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Mask"
+          },
+          "exempt": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Exempt"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mask"
+        ],
+        "title": "BundleTagMaskIn",
+        "description": "dbx-migrator's ``tag_masks.<key>``: its mask name (``hash``, ``null``, ``redact``, ``show_last_4``,\n``show_first_4``, ``year``, ``deny``) and the groups it does not mask for."
       },
       "BundleTargetOut": {
         "properties": {
@@ -38014,6 +39746,57 @@
         ],
         "title": "CatalogList"
       },
+      "CatalogScope": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "bindings",
+              "narrow",
+              "listed",
+              "grants"
+            ],
+            "title": "Mode",
+            "default": "bindings"
+          },
+          "catalogs": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "patternProperties": {
+                      "^[A-Za-z_][A-Za-z0-9_]{0,62}$": {
+                        "type": "string",
+                        "enum": [
+                          "read_write",
+                          "read_only"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    },
+                    "type": "array"
+                  }
+                ],
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Catalogs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CatalogScope",
+        "description": "``bindings`` (the default), ``narrow`` (a subset of the bindings; a list keeps each binding's mode), ``listed``\n(catalogs outside the bindings, each with a mode) or ``grants`` (every catalog the person's grants reach)."
+      },
       "CatalogUpdate": {
         "properties": {
           "isolation": {
@@ -38236,6 +40019,21 @@
               }
             ],
             "title": "Description"
+          },
+          "allowed_values": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed Values"
           }
         },
         "type": "object",
@@ -38626,6 +40424,101 @@
         "title": "ColumnStatsOut",
         "description": "Counts only, never a value: also shown for personal columns (the profile computes them for every column)."
       },
+      "ColumnTagsIn": {
+        "properties": {
+          "schema": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Schema"
+          },
+          "table": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Table"
+          },
+          "column": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Column"
+          },
+          "add": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Add"
+          },
+          "remove": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Remove"
+          },
+          "values": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "maxProperties": 20,
+            "title": "Values"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "schema",
+          "table",
+          "column"
+        ],
+        "title": "ColumnTagsIn",
+        "description": "Tags to add to one column, or to remove from it, by their bare names: the catalog's own tags only."
+      },
+      "ColumnTagsOut": {
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "title": "Namespace"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table"
+          },
+          "column": {
+            "type": "string",
+            "title": "Column"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "values": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Values",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "namespace",
+          "table",
+          "column",
+          "tags"
+        ],
+        "title": "ColumnTagsOut",
+        "description": "A column's governed tags after a change, by their bare names (data-tag-access TA-9, TA-13)."
+      },
       "ConfigInfo": {
         "properties": {
           "api_version": {
@@ -38692,6 +40585,9 @@
             "type": "object",
             "title": "Service Versions",
             "default": {}
+          },
+          "run_catalog_scope": {
+            "$ref": "#/components/schemas/RunCatalogScope"
           }
         },
         "type": "object",
@@ -38807,6 +40703,48 @@
           "decided_at"
         ],
         "title": "ConfirmOut"
+      },
+      "ConflictingMaskOut": {
+        "properties": {
+          "mask_type": {
+            "type": "string",
+            "title": "Mask Type"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "unity",
+              "personal",
+              "tag"
+            ],
+            "title": "Source"
+          },
+          "tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tag",
+            "description": "The tag whose mask this is, named as in `tags`"
+          },
+          "applies_to_me": {
+            "type": "boolean",
+            "title": "Applies To Me"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mask_type",
+          "source",
+          "applies_to_me"
+        ],
+        "title": "ConflictingMaskOut",
+        "description": "One of a column's masks of different types: the column's own (`source` as on a mask) or a tag's."
       },
       "ContractListItem": {
         "properties": {
@@ -39401,6 +41339,18 @@
               }
             ],
             "title": "Target"
+          },
+          "plan_digest": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan Digest"
           }
         },
         "type": "object",
@@ -39677,6 +41627,25 @@
             "type": "array",
             "title": "Warnings",
             "default": []
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryOut"
+            },
+            "type": "array",
+            "title": "Resources",
+            "default": []
+          },
+          "plan_digest": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan Digest"
           }
         },
         "type": "object",
@@ -41180,6 +43149,22 @@
               }
             ],
             "title": "Description"
+          },
+          "allowed_values": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed Values",
+            "description": "tag_define: the values the tag may take, in order; omitted keeps the tag's list, [] clears it"
           }
         },
         "additionalProperties": false,
@@ -41540,6 +43525,43 @@
           "applied_at"
         ],
         "title": "HygieneOut"
+      },
+      "IdentityRemovedOut": {
+        "properties": {
+          "found": {
+            "type": "boolean",
+            "title": "Found"
+          },
+          "roles_removed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Roles Removed"
+          },
+          "principal_removed": {
+            "type": "boolean",
+            "title": "Principal Removed"
+          },
+          "ranger_user_removed": {
+            "type": "boolean",
+            "title": "Ranger User Removed"
+          },
+          "record_removed": {
+            "type": "boolean",
+            "title": "Record Removed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "found",
+          "roles_removed",
+          "principal_removed",
+          "ranger_user_removed",
+          "record_removed"
+        ],
+        "title": "IdentityRemovedOut",
+        "description": "What the deprovision removed. ``found`` is false when nothing of the person this service made was left (or the\nname is someone else's): no Ranger or Polaris call changed anything, and a second call answers the same way.\n``record_removed`` can still be true then: the sync row of a name whose Ranger user someone else made."
       },
       "ImpactItemOut": {
         "properties": {
@@ -43111,6 +45133,18 @@
             ],
             "title": "Error"
           },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code",
+            "description": "`outcome_unknown`: a write was sent and its outcome is unknown (data-outcome-unknown); the task is never retried. Check the table before you run it again"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -43567,6 +45601,18 @@
             ],
             "title": "Error"
           },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code",
+            "description": "`outcome_unknown`: a write was sent and its outcome is unknown (data-outcome-unknown); the task is never retried. Check the table before you run it again"
+          },
           "created_at": {
             "anyOf": [
               {
@@ -43845,6 +45891,17 @@
           "message": {
             "type": "string",
             "title": "Message"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
           }
         },
         "type": "object",
@@ -44415,6 +46472,34 @@
           "runs": {
             "type": "integer",
             "title": "Runs"
+          },
+          "run_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run By"
+          },
+          "run_by_status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "denied",
+                  "unchecked",
+                  "erased"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run By Status"
           }
         },
         "type": "object",
@@ -44690,6 +46775,34 @@
           "summary"
         ],
         "title": "MaskChangeOut"
+      },
+      "MaskConflictOut": {
+        "properties": {
+          "column": {
+            "type": "string",
+            "title": "Column"
+          },
+          "masks": {
+            "items": {
+              "$ref": "#/components/schemas/ConflictingMaskOut"
+            },
+            "type": "array",
+            "title": "Masks"
+          },
+          "refused_for_me": {
+            "type": "boolean",
+            "title": "Refused For Me",
+            "description": "Two of the masks apply to the caller, so the column is refused to them"
+          }
+        },
+        "type": "object",
+        "required": [
+          "column",
+          "masks",
+          "refused_for_me"
+        ],
+        "title": "MaskConflictOut",
+        "description": "A column with masks of more than one type (data-tag-access TA-11): there is no winner. Spark refuses a\nstatement that reads the column for anyone two of the masks apply to, and so does SQE under `mask_precedence =\n\"refuse\"` (otherwise SQE applies one of them). Remove one mask, or make them the same type.\nMade past the portal (a tag set through SQE or Spark); the portal refuses it when written (409\n`mask_conflict`)."
       },
       "MaskOut": {
         "properties": {
@@ -45222,6 +47335,32 @@
             },
             "type": "array",
             "title": "Tags",
+            "default": []
+          },
+          "mask_conflicts": {
+            "items": {
+              "$ref": "#/components/schemas/MaskConflictOut"
+            },
+            "type": "array",
+            "title": "Mask Conflicts",
+            "default": []
+          },
+          "assigned_tags": {
+            "items": {
+              "$ref": "#/components/schemas/AssignedTagOut"
+            },
+            "type": "array",
+            "title": "Assigned Tags",
+            "description": "The portal store's tags on the object and each column, own and inherited (not enforced)",
+            "default": []
+          },
+          "system_tags": {
+            "items": {
+              "$ref": "#/components/schemas/SystemTagOut"
+            },
+            "type": "array",
+            "title": "System Tags",
+            "description": "`class=<level>` of a table or view and each of its columns (read only)",
             "default": []
           }
         },
@@ -45953,6 +48092,16 @@
               }
             ],
             "title": "Catalog"
+          },
+          "catalog_scope": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CatalogScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -46581,6 +48730,26 @@
           "diff"
         ],
         "title": "ProjectDiffOut"
+      },
+      "ProjectDocsTicket": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "Serves the run's docs site once, to a frame of this service or the portal, no token"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "expires_at"
+        ],
+        "title": "ProjectDocsTicket"
       },
       "ProjectExplainOut": {
         "properties": {
@@ -47432,6 +49601,17 @@
               }
             ],
             "title": "Catalog Binding"
+          },
+          "catalog_scope": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RunCatalogScopeInfo"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The catalog scope sent to SQE; null with PORTAL_DATA_RUN_CATALOG_SCOPE off"
           },
           "changed": {
             "anyOf": [
@@ -48444,6 +50624,68 @@
         ],
         "title": "RuleOut"
       },
+      "RunCatalogScope": {
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "off",
+              "sent"
+            ],
+            "title": "State"
+          }
+        },
+        "type": "object",
+        "required": [
+          "state"
+        ],
+        "title": "RunCatalogScope",
+        "description": "data-run-catalog-scope D5: ``sent`` when runs get a run token and a catalog scope for SQE. It says the scope is\nsent, never that it is enforced: enforcement is SQE's, where its ``[session.catalog_scope]`` is set."
+      },
+      "RunCatalogScopeInfo": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "bindings",
+              "narrow",
+              "listed",
+              "grants"
+            ],
+            "title": "Mode"
+          },
+          "catalogs": {
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "read_write",
+                "read_only"
+              ]
+            },
+            "type": "object",
+            "title": "Catalogs"
+          },
+          "set_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Set By",
+            "description": "A widened scope: who set it (a person reference)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "catalogs"
+        ],
+        "title": "RunCatalogScopeInfo",
+        "description": "The catalog scope sent to SQE with the run's token (data-run-catalog-scope D3). Sent, not enforced: SQE\nenforces it where its ``[session.catalog_scope]`` is set (config ``run_catalog_scope.state``)."
+      },
       "RunNow": {
         "properties": {
           "job_parameters": {
@@ -48583,6 +50825,48 @@
           "checks"
         ],
         "title": "RunOut"
+      },
+      "RunScopeCapIn": {
+        "properties": {
+          "cap": {
+            "type": "string",
+            "enum": [
+              "bindings",
+              "listed",
+              "grants"
+            ],
+            "title": "Cap"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cap"
+        ],
+        "title": "RunScopeCapIn"
+      },
+      "RunScopeCapOut": {
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "title": "Workspace"
+          },
+          "cap": {
+            "type": "string",
+            "enum": [
+              "bindings",
+              "listed",
+              "grants"
+            ],
+            "title": "Cap"
+          }
+        },
+        "type": "object",
+        "required": [
+          "workspace",
+          "cap"
+        ],
+        "title": "RunScopeCapOut"
       },
       "RunSummaryOut": {
         "properties": {
@@ -49839,6 +52123,174 @@
         ],
         "title": "Secrets"
       },
+      "SelectAdminMissing": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "catalog": {
+            "type": "string",
+            "title": "Catalog"
+          },
+          "tables": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "catalog",
+          "tables"
+        ],
+        "title": "SelectAdminMissing"
+      },
+      "SelectBackfillOut": {
+        "properties": {
+          "applied": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Applied"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/SelectCoverageOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applied",
+          "coverage"
+        ],
+        "title": "SelectBackfillOut"
+      },
+      "SelectCatalog": {
+        "properties": {
+          "catalog": {
+            "type": "string",
+            "title": "Catalog"
+          },
+          "tables": {
+            "type": "integer",
+            "title": "Tables"
+          },
+          "missing": {
+            "items": {
+              "$ref": "#/components/schemas/SelectMissing"
+            },
+            "type": "array",
+            "title": "Missing"
+          },
+          "outside": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "samples",
+                  "system"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outside"
+          },
+          "listed": {
+            "type": "boolean",
+            "title": "Listed"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "catalog",
+          "tables",
+          "missing",
+          "listed"
+        ],
+        "title": "SelectCatalog"
+      },
+      "SelectCoverageOut": {
+        "properties": {
+          "checked_at": {
+            "type": "string",
+            "title": "Checked At"
+          },
+          "ranger_select": {
+            "type": "boolean",
+            "title": "Ranger Select"
+          },
+          "complete": {
+            "type": "boolean",
+            "title": "Complete"
+          },
+          "catalogs": {
+            "items": {
+              "$ref": "#/components/schemas/SelectCatalog"
+            },
+            "type": "array",
+            "title": "Catalogs"
+          },
+          "platform_admin_roles": {
+            "items": {
+              "$ref": "#/components/schemas/SelectAdminMissing"
+            },
+            "type": "array",
+            "title": "Platform Admin Roles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "checked_at",
+          "ranger_select",
+          "complete",
+          "catalogs",
+          "platform_admin_roles"
+        ],
+        "title": "SelectCoverageOut"
+      },
+      "SelectMissing": {
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "title": "Namespace"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table"
+          },
+          "principals": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Principals"
+          }
+        },
+        "type": "object",
+        "required": [
+          "namespace",
+          "table",
+          "principals"
+        ],
+        "title": "SelectMissing"
+      },
       "SessionPip": {
         "properties": {
           "enabled": {
@@ -50279,6 +52731,23 @@
           "message": {
             "type": "string",
             "title": "Message"
+          },
+          "cause": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "lost_answer",
+                  "timeout",
+                  "replica_lost"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cause",
+            "description": "Why the outcome is unknown; only with code outcome_unknown (sql 1.7), left out otherwise."
           }
         },
         "type": "object",
@@ -50287,7 +52756,7 @@
           "message"
         ],
         "title": "StatementFailure",
-        "description": "Why a statement failed: ``failed`` (the engine refused it), ``timeout``, ``token_expired``,\n``unauthenticated``, ``unavailable`` (the engine could not be reached), ``replica_lost`` or ``internal``."
+        "description": "Why a statement failed: ``failed`` (the engine refused it), ``timeout``, ``token_expired``,\n``unauthenticated``, ``unavailable`` (the engine could not be reached), ``too_many_requests`` (the engine was busy;\nsubmit it again in a few seconds), ``replica_lost``, ``outcome_unknown`` or ``internal``.\n\n``outcome_unknown`` (sql 1.7): a write was sent and its answer was lost, it ran out of time, or the service stopped\nwhile it ran. It may or may not have changed the table: check the table before you run it again, never retry it\nblindly. ``cause`` says why. ``timeout`` and ``replica_lost`` are then a read's only."
       },
       "StatementInfo": {
         "properties": {
@@ -50484,7 +52953,7 @@
           "engine"
         ],
         "title": "StatementRows",
-        "description": "A finished statement's rows. A failure is an ``ErrorInfo`` (``statement_failed`` with ``details.line`` when\nthe engine named one, ``privilege_refused``, ``catalog_*``), never an answer with an error inside."
+        "description": "A finished statement's rows. A failure is an ``ErrorInfo`` (``statement_failed`` with ``details.line`` when\nthe engine named one, ``privilege_refused``, ``catalog_*``, ``too_many_requests`` with ``Retry-After`` when the\nengine was busy), never an answer with an error inside."
       },
       "StatementSubmit": {
         "properties": {
@@ -51364,6 +53833,52 @@
         ],
         "title": "SystemRunOut"
       },
+      "SystemTagOut": {
+        "properties": {
+          "column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Column"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "column",
+              "table",
+              "default"
+            ],
+            "title": "Source",
+            "description": "Where the level comes from: the column's own classification, the table's, or the default"
+          },
+          "read_only": {
+            "type": "boolean",
+            "title": "Read Only",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "tag",
+          "value",
+          "source"
+        ],
+        "title": "SystemTagOut",
+        "description": "A tag the portal computes from the object and nobody sets (data-tag-inheritance TI-5): ``class=<level>``, the\nclassification of a table or view (``column`` null) and of each of its columns. Read only: changed by\nclassifying, refused by tagging (422 ``system_tag``)."
+      },
       "TableContracts": {
         "properties": {
           "items": {
@@ -51636,6 +54151,329 @@
         ],
         "title": "TableTerms"
       },
+      "TagAssignmentOut": {
+        "properties": {
+          "column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Column"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "set_by": {
+            "type": "string",
+            "title": "Set By"
+          },
+          "set_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Set At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tag",
+          "set_by",
+          "set_at"
+        ],
+        "title": "TagAssignmentOut",
+        "description": "One governed tag assigned in the portal's store (data-tag-inheritance TI-1): on the object itself, or on one\nof a table's or view's columns."
+      },
+      "TagAssignmentsIn": {
+        "properties": {
+          "schema": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schema"
+          },
+          "table": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Table"
+          },
+          "column": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Column"
+          },
+          "add": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Add"
+          },
+          "remove": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Remove"
+          },
+          "values": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "maxProperties": 20,
+            "title": "Values"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TagAssignmentsIn",
+        "description": "Tags to assign to one object, or to remove from it, by their bare names: the catalog's own tags only. Neither\n``schema`` nor ``table``: the catalog; ``column`` only with a table or view."
+      },
+      "TagAssignmentsOut": {
+        "properties": {
+          "namespace": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Namespace"
+          },
+          "table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Table"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TagAssignmentOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "system": {
+            "items": {
+              "$ref": "#/components/schemas/SystemTagOut"
+            },
+            "type": "array",
+            "title": "System",
+            "description": "System tags (`class=<level>`) of a table or view and its columns; listed by GET only",
+            "default": []
+          },
+          "inherited": {
+            "items": {
+              "$ref": "#/components/schemas/AssignedTagOut"
+            },
+            "type": "array",
+            "title": "Inherited",
+            "description": "Tags assigned on the object's schema or catalog that reach it, a nearer level's value winning and none the object assigns itself (governance API 1.21); listed by GET only",
+            "default": []
+          },
+          "enforced": {
+            "type": "boolean",
+            "title": "Enforced",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "items"
+        ],
+        "title": "TagAssignmentsOut",
+        "description": "The tags assigned on one object in the portal's store. ``enforced`` is false: no engine reads these\nassignments yet, so they classify and do not mask or filter (TI-4; SQE's own tags are ``sqe.*-tags``)."
+      },
+      "TagImportIn": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "maxLength": 104,
+            "pattern": "^(account|[a-z0-9][a-z0-9-]{0,39})/[^/.\\s]+$",
+            "title": "Source",
+            "examples": [
+              "ms-eu/main"
+            ]
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/BundleTagIn"
+            },
+            "type": "array",
+            "maxItems": 2000,
+            "title": "Tags"
+          },
+          "masks": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/BundleTagMaskIn"
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Masks"
+          },
+          "policies": {
+            "items": {
+              "$ref": "#/components/schemas/BundlePolicyIn"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Policies"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "title": "TagImportIn",
+        "description": "A dbx-migrator bundle's tags for this catalog. ``source`` is the bundle's catalog that lands here, as its refs\nqualify it (``<metastore alias>/<catalog>``); a line of any other catalog is reported."
+      },
+      "TagImportOut": {
+        "properties": {
+          "assigned": {
+            "type": "integer",
+            "title": "Assigned"
+          },
+          "replaced": {
+            "type": "integer",
+            "title": "Replaced",
+            "description": "Assignments that had another value; the bundle's value now"
+          },
+          "unchanged": {
+            "type": "integer",
+            "title": "Unchanged"
+          },
+          "masks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Masks",
+            "description": "Tags whose mask was set"
+          },
+          "masks_unchanged": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Masks Unchanged"
+          },
+          "reported": {
+            "items": {
+              "$ref": "#/components/schemas/TagImportReportOut"
+            },
+            "type": "array",
+            "title": "Reported"
+          },
+          "enforced": {
+            "type": "boolean",
+            "title": "Enforced",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "assigned",
+          "replaced",
+          "unchanged",
+          "masks",
+          "masks_unchanged",
+          "reported"
+        ],
+        "title": "TagImportOut",
+        "description": "What importing a bundle's tags did (data-tag-inheritance TI-6). ``enforced`` is false, as for every\nassignment in the portal's store (TI-4)."
+      },
+      "TagImportReportOut": {
+        "properties": {
+          "reason": {
+            "type": "string",
+            "enum": [
+              "unreadable",
+              "other_source",
+              "kind_not_imported",
+              "invalid_key",
+              "system_tag",
+              "unknown_tag",
+              "value_not_allowed",
+              "conflicting_values",
+              "not_found",
+              "function_mask",
+              "grant_by_tag",
+              "value_policy"
+            ],
+            "title": "Reason"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag",
+            "description": "The tag key; empty when the key is not a tag name"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reason",
+          "tag",
+          "count"
+        ],
+        "title": "TagImportReportOut",
+        "description": "Bundle lines, masks or policies not imported, by reason and tag key; never a value (it can name a person)."
+      },
       "TagOnColumnOut": {
         "properties": {
           "column": {
@@ -51676,6 +54514,17 @@
           "filter_applies_to_me": {
             "type": "boolean",
             "title": "Filter Applies To Me"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "column",
+              "table",
+              "schema"
+            ],
+            "title": "Source",
+            "description": "Where the tag sits: on the column itself, or on its table (`sqe.table-tags`) or its schema (`sqe.schema-tags`, while SQE inherits schema tags), whose tags count on every top-level column",
+            "default": "column"
           }
         },
         "type": "object",
@@ -51743,6 +54592,20 @@
             "type": "array",
             "title": "Filter Except"
           },
+          "allowed_values": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed Values"
+          },
           "set_by": {
             "type": "string",
             "title": "Set By"
@@ -51766,7 +54629,7 @@
           "set_at"
         ],
         "title": "TagOut",
-        "description": "A governed tag of the catalog, by its bare name: the catalog it belongs to is the route's (data-tag-access\nTA-13). Ranger and ``sqe.column-tags`` name it ``<catalog>.<name>`` until SQE scopes tag policies itself."
+        "description": "A governed tag of the catalog, by its bare name: the catalog it belongs to is the route's (data-tag-access\nTA-13). Ranger names it ``<catalog>.<name>``, and so does the service in ``sqe.column-tags`` (task 6.7)."
       },
       "TagsOut": {
         "properties": {
@@ -53731,6 +56594,17 @@
             ],
             "title": "Default Catalog",
             "description": "Where runs, notebooks and jobs that name no catalog start; None: the home catalog"
+          },
+          "run_scope_cap": {
+            "type": "string",
+            "enum": [
+              "bindings",
+              "listed",
+              "grants"
+            ],
+            "title": "Run Scope Cap",
+            "description": "The widest catalog scope the workspace's admin may give a run (data-run-catalog-scope D3); data.admin sets it",
+            "default": "bindings"
           }
         },
         "type": "object",
@@ -54176,6 +57050,18 @@
               }
             ],
             "title": "Error"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code",
+            "description": "`outcome_unknown`: a write was sent and its outcome is unknown (data-outcome-unknown); the task is never retried. Check the table before you run it again"
           },
           "created_at": {
             "type": "string",
