@@ -7,10 +7,10 @@
       "admin": "1.3",
       "audit": "1.5",
       "catalog": "1.12",
-      "governance": "1.23",
+      "governance": "1.24",
       "iceberg": "1.0",
       "ingest": "1.3",
-      "jobs": "1.8",
+      "jobs": "1.10",
       "me": "1.8",
       "notifications": "1.2",
       "projects": "1.8",
@@ -8872,7 +8872,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -9041,7 +9041,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -9241,7 +9241,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; a privilege on the securable (in the handler)",
         "x-rate-class": "read"
@@ -9378,7 +9378,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write"
@@ -9515,7 +9515,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write",
@@ -9663,7 +9663,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -9800,7 +9800,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on the column, checked by SQE as the caller (in the handler)",
         "x-rate-class": "write",
@@ -9982,7 +9982,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10117,7 +10117,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on the object, MANAGE or ownership, checked by the portal (in the handler)",
         "x-rate-class": "write",
@@ -10255,7 +10255,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on each object, MANAGE or ownership, checked by the portal; MANAGE for a mask (in the handler)",
         "x-rate-class": "write",
@@ -10468,7 +10468,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE to ask about another person (in the handler)",
         "x-rate-class": "query"
@@ -10632,7 +10632,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10759,7 +10759,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE on the catalog (in the handler)",
         "x-rate-class": "write",
@@ -10915,7 +10915,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11091,7 +11091,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11217,7 +11217,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11364,7 +11364,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11492,7 +11492,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11659,7 +11659,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "search"
@@ -11824,7 +11824,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11979,7 +11979,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12119,7 +12119,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12258,7 +12258,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12408,7 +12408,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12573,7 +12573,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12799,7 +12799,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; tables the caller cannot read are hidden (in the handler)",
         "x-rate-class": "read"
@@ -12964,7 +12964,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13146,7 +13146,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13311,7 +13311,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13493,7 +13493,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13675,7 +13675,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13832,7 +13832,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -14015,7 +14015,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14184,7 +14184,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14366,7 +14366,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14521,7 +14521,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -14704,7 +14704,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14870,7 +14870,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15044,7 +15044,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15171,7 +15171,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -15319,7 +15319,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15466,7 +15466,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -21176,7 +21176,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -21367,7 +21367,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21574,7 +21574,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21738,7 +21738,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write"
@@ -21911,7 +21911,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -22087,7 +22087,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -22250,7 +22250,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write",
@@ -22439,7 +22439,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -22623,7 +22623,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -22770,7 +22770,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -22938,13 +22938,568 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE RUN (in the handler)",
         "x-rate-class": "write",
         "x-audit-action": "data.jobs.run",
         "x-mcp": true,
         "x-idempotency-key": true
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Jobs Ingest Ledger List",
+        "description": "CAN VIEW on the job. An ``auto_ingest`` task's ledger, most recently changed first (its counts: ``\u2026/summary``).\nA path is shown only to a caller who may read the task's volume (READ VOLUME), and that read is audited.\n\nStability: preview. Permission: data.view; view on the workspace; CAN VIEW on the job; paths: READ VOLUME (in the handler).",
+        "operationId": "jobs_ingest_ledger_list",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Project"
+            }
+          },
+          {
+            "name": "job",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job"
+            }
+          },
+          {
+            "name": "task_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Key"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only files in this state: pending, loaded, failed, skipped",
+              "title": "State"
+            },
+            "description": "Only files in this state: pending, loaded, failed, skipped"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "From the previous page's next_cursor; omit for the first page",
+              "title": "Cursor"
+            },
+            "description": "From the previous page's next_cursor; omit for the first page"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "Items per page",
+              "default": 100,
+              "title": "Limit"
+            },
+            "description": "Items per page"
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated fields to return: of each item of a list, or of the object. An unknown field is 400 invalid_parameter (data-api-consistency C19)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestLedgerList"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "jobs",
+        "x-service-version": "1.10",
+        "x-stability": "preview",
+        "x-permission": "data.view; view on the workspace; CAN VIEW on the job; paths: READ VOLUME (in the handler)",
+        "x-rate-class": "read",
+        "x-audit-action": "data.volume.read"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger/summary": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Jobs Ingest Ledger Summary",
+        "description": "CAN VIEW on the job. An ``auto_ingest`` task's files per state, its volume and table, whether the caller sees\npaths (READ VOLUME on the volume; no path is read here, so nothing is audited) and the tries a file gets.\n\nStability: preview. Permission: data.view; view on the workspace; CAN VIEW on the job (in the handler).",
+        "operationId": "jobs_ingest_ledger_summary",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Project"
+            }
+          },
+          {
+            "name": "job",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job"
+            }
+          },
+          {
+            "name": "task_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Key"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated fields to return: of each item of a list, or of the object. An unknown field is 400 invalid_parameter (data-api-consistency C19)."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A tag from an earlier read: 304 with no body while the resource still has it (weak comparison; data-api-consistency C18.4)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestLedgerSummary"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The resource's tag (weak with fields)."
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "304": {
+            "description": "Not Modified: the resource still has the tag asked about",
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The resource's tag (weak with fields)."
+              }
+            }
+          }
+        },
+        "x-paged": false,
+        "x-service": "jobs",
+        "x-service-version": "1.10",
+        "x-stability": "preview",
+        "x-permission": "data.view; view on the workspace; CAN VIEW on the job (in the handler)",
+        "x-rate-class": "search"
+      }
+    },
+    "/api/data/v1/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger/{ledger_id}/retry": {
+      "post": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Jobs Ingest Ledger Retry",
+        "description": "CAN MANAGE RUN on the job. A failed file back to ``pending`` with its tries started over; the task's next run\nloads it (this starts no run). Refused 409 ``not_retryable`` (not failed, or refused by the scan) or\n``ledger_busy`` (a running task holds it), 503 ``auto_ingest_unavailable`` where auto ingest is not set up.\n\nStability: preview. Permission: data.view; view on the workspace; CAN MANAGE RUN (in the handler).",
+        "operationId": "jobs_ingest_ledger_retry",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Project"
+            }
+          },
+          {
+            "name": "job",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job"
+            }
+          },
+          {
+            "name": "task_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Key"
+            }
+          },
+          {
+            "name": "ledger_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ledger Id"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestLedgerItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "jobs",
+        "x-service-version": "1.10",
+        "x-stability": "preview",
+        "x-permission": "data.view; view on the workspace; CAN MANAGE RUN (in the handler)",
+        "x-rate-class": "write",
+        "x-audit-action": "data.jobs.ingest_retry"
       }
     },
     "/api/data/v1/workspaces/{workspace}/projects/{project}/deployment": {
@@ -23105,7 +23660,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -23259,7 +23814,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -23404,7 +23959,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -23549,7 +24104,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -23713,7 +24268,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -23867,7 +24422,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24011,7 +24566,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24148,7 +24703,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24285,7 +24840,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT on the project (in the handler)",
         "x-rate-class": "write",
@@ -24423,7 +24978,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -24611,7 +25166,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -24798,7 +25353,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -24971,7 +25526,7 @@
         },
         "x-paged": false,
         "x-service": "jobs",
-        "x-service-version": "1.8",
+        "x-service-version": "1.10",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -36735,7 +37290,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -36872,7 +37427,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37000,7 +37555,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37127,7 +37682,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37246,7 +37801,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37372,7 +37927,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37492,7 +38047,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37619,7 +38174,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37746,7 +38301,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.23",
+        "x-service-version": "1.24",
         "x-stability": "stable",
         "x-permission": "public or key; a lineage producer's key (in the handler)",
         "x-rate-class": "write"
@@ -43937,6 +44492,198 @@
         ],
         "title": "InboxOut"
       },
+      "IngestLedgerItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "state": {
+            "type": "string",
+            "title": "State",
+            "description": "One of pending, loaded, failed, skipped"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "description": "Why it failed or was skipped: a code (scan_refused, too_large, \u2026)"
+          },
+          "attempts": {
+            "type": "integer",
+            "title": "Attempts"
+          },
+          "rows": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rows"
+          },
+          "snapshot_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Snapshot Id"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "title": "Size Bytes"
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path",
+            "description": "Inside the volume; null unless the caller holds READ VOLUME on it"
+          },
+          "actions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions",
+            "description": "What the caller may call on it next: retry"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "state",
+          "attempts",
+          "rows",
+          "snapshot_id",
+          "size_bytes",
+          "modified_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "IngestLedgerItem",
+        "description": "One file version the task saw. ``path`` (inside the volume) only for a caller who may read the volume."
+      },
+      "IngestLedgerList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/IngestLedgerItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "IngestLedgerList"
+      },
+      "IngestLedgerSummary": {
+        "properties": {
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Counts",
+            "description": "Files per state"
+          },
+          "volume": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Volume",
+            "description": "The task's volume, when its parameters name it without a run"
+          },
+          "table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Table"
+          },
+          "paths_visible": {
+            "type": "boolean",
+            "title": "Paths Visible",
+            "description": "The caller may read the volume, so each item carries its path"
+          },
+          "max_attempts": {
+            "type": "integer",
+            "title": "Max Attempts",
+            "description": "Tries a failed file gets before only a retry by hand loads it"
+          }
+        },
+        "type": "object",
+        "required": [
+          "counts",
+          "paths_visible",
+          "max_attempts"
+        ],
+        "title": "IngestLedgerSummary",
+        "description": "The ledger as a whole: what the list pages through, counted (as ``WorkspaceJobStats`` beside its list)."
+      },
       "IngestOut": {
         "properties": {
           "accepted": {
@@ -46523,6 +47270,7 @@
             "type": "string",
             "enum": [
               "table",
+              "view",
               "hidden",
               "external",
               "dropped"
@@ -52756,7 +53504,7 @@
           "message"
         ],
         "title": "StatementFailure",
-        "description": "Why a statement failed: ``failed`` (the engine refused it), ``timeout``, ``token_expired``,\n``unauthenticated``, ``unavailable`` (the engine could not be reached), ``too_many_requests`` (the engine was busy;\nsubmit it again in a few seconds), ``replica_lost``, ``outcome_unknown`` or ``internal``.\n\n``outcome_unknown`` (sql 1.7): a write was sent and its answer was lost, it ran out of time, or the service stopped\nwhile it ran. It may or may not have changed the table: check the table before you run it again, never retry it\nblindly. ``cause`` says why. ``timeout`` and ``replica_lost`` are then a read's only."
+        "description": "Why a statement failed: the code the synchronous route answers a 403 or 422 with (a refusal:\n``policy_conflict``, ``privilege_refused``, ``service_account``, ``catalog_*``; the engine failed it:\n``statement_failed``, its message the engine's), ``failed`` (a failure with no code of its own), ``timeout``,\n``token_expired``, ``unauthenticated``, ``unavailable`` (the engine could not be reached), ``too_many_requests``\n(the engine was busy; submit it again in a few seconds), ``replica_lost``, ``outcome_unknown`` or ``internal``.\n\n``outcome_unknown`` (sql 1.7): a write was sent and its answer was lost, it ran out of time, or the service stopped\nwhile it ran. It may or may not have changed the table: check the table before you run it again, never retry it\nblindly. ``cause`` says why. ``timeout`` and ``replica_lost`` are then a read's only."
       },
       "StatementInfo": {
         "properties": {

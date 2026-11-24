@@ -43,6 +43,9 @@ NOT_IN_SDK: dict[str, str] = {
     "spark_audit_ingest": "the Spark gateway posts it with its own key, not a person",
     "lineage_events_ingest": "engines post OpenLineage events with a producer key, not a person",
     "quality_runs_run_all": "a server-sent stream for the quality page; Quality.run() runs a table's checks",
+    "jobs_ingest_ledger_list": "preview, not wrapped yet (came in with a contract refresh); a method is a follow-up",
+    "jobs_ingest_ledger_retry": "preview, not wrapped yet (came in with a contract refresh); a method is a follow-up",
+    "jobs_ingest_ledger_summary": "preview, not wrapped yet (came in with a contract refresh); a method is a follow-up",
 }
 
 _warned: set[str] = set()

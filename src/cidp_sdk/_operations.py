@@ -7,7 +7,7 @@ first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are 
 without notice.
 """
 
-# contract sha256: 6d4ed8db61593c80a5b44ae6c92e086e41ef6c676746cea83baca35367fc1b8c
+# contract sha256: 0d19b54c268cf739949ed4a33ee2b095c67c58e27db299f3d3b15be6a208e7f1
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
@@ -72,6 +72,9 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'jobs_deployment_validate': ('POST', '/workspaces/{workspace}/projects/{project}/deployment/validate', 'stable', 'jobs'),
     'jobs_file_usage_list': ('GET', '/workspaces/{workspace}/projects/{project}/file-usage', 'stable', 'jobs'),
     'jobs_get': ('GET', '/workspaces/{workspace}/projects/{project}/jobs/{job}', 'stable', 'jobs'),
+    'jobs_ingest_ledger_list': ('GET', '/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger', 'preview', 'jobs'),
+    'jobs_ingest_ledger_retry': ('POST', '/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger/{ledger_id}/retry', 'preview', 'jobs'),
+    'jobs_ingest_ledger_summary': ('GET', '/workspaces/{workspace}/projects/{project}/jobs/{job}/tasks/{task_key}/ledger/summary', 'preview', 'jobs'),
     'jobs_list': ('GET', '/workspaces/{workspace}/projects/{project}/jobs', 'stable', 'jobs'),
     'jobs_permissions_get': ('GET', '/workspaces/{workspace}/projects/{project}/jobs/{job}/permissions', 'stable', 'jobs'),
     'jobs_permissions_update': ('PUT', '/workspaces/{workspace}/projects/{project}/jobs/{job}/permissions', 'stable', 'jobs'),
