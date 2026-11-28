@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- `lineage.get` takes `columns="all"` (the edges of every column, not one `column` at a time) and
+  `indirect="dataset"` (the table-level join, filter and group by inputs), as the data service's governance 1.27
+  allows (ai-portal-data data-dbt-lineage-quality, DL-5 and DL-6).
 - `outcome_unknown` (the data service's sql and jobs 1.7, data-outcome-unknown; ai-portal-data issue 758): callers
   can now receive it. It means the write may or may not have happened: check before you repeat it. The SDK raises
   `OutcomeUnknown` (a `CIDPError`, with `code`, `status`, `request_id` and the service's `cause`: `lost_answer`,

@@ -127,3 +127,17 @@ def test_operations_are_current() -> None:
     contract = (ROOT / "contract" / "openapi-v1.json").read_text()
     committed = (ROOT / "src" / "cidp_sdk" / "_operations.py").read_text()
     assert committed == gen.render_operations(contract), "run make sdk-models"
+
+
+def test_lineage_get_sends_columns_and_indirect() -> None:
+    """``columns="all"`` and ``indirect="dataset"`` reach the query (ai-portal-data data-dbt-lineage-quality DL-5)."""
+    sent: list[httpx.Request] = []
+
+    def answer(request: httpx.Request) -> httpx.Response:
+        sent.append(request)
+        return httpx.Response(200, json={})
+
+    service = services.Lineage(Http("https://portal.example.org", None, transport=httpx.MockTransport(answer)))
+    with pytest.raises(pydantic.ValidationError):
+        service.get("sales", "finance", "raw", "orders", columns="all", indirect="dataset")
+    assert dict(sent[-1].url.params) == {"columns": "all", "indirect": "dataset"}
