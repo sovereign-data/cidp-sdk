@@ -7,7 +7,7 @@ first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are 
 without notice.
 """
 
-# contract sha256: 0d19b54c268cf739949ed4a33ee2b095c67c58e27db299f3d3b15be6a208e7f1
+# contract sha256: 6ef3c048ef311933ab83c89fc13a4418dc111c2700bf4142a4e7111e246dcdcb
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
