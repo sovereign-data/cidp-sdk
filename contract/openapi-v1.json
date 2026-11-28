@@ -7,13 +7,13 @@
       "admin": "1.3",
       "audit": "1.5",
       "catalog": "1.12",
-      "governance": "1.24",
+      "governance": "1.28",
       "iceberg": "1.0",
       "ingest": "1.3",
-      "jobs": "1.10",
+      "jobs": "1.11",
       "me": "1.8",
       "notifications": "1.2",
-      "projects": "1.8",
+      "projects": "1.9",
       "secrets": "1.3",
       "sql": "1.7",
       "system": "1.5"
@@ -8872,7 +8872,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -9041,7 +9041,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -9241,7 +9241,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; a privilege on the securable (in the handler)",
         "x-rate-class": "read"
@@ -9378,7 +9378,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write"
@@ -9515,7 +9515,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE per change (in the handler)",
         "x-rate-class": "write",
@@ -9663,7 +9663,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -9800,7 +9800,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on the column, checked by SQE as the caller (in the handler)",
         "x-rate-class": "write",
@@ -9982,7 +9982,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10117,7 +10117,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on the object, MANAGE or ownership, checked by the portal (in the handler)",
         "x-rate-class": "write",
@@ -10255,7 +10255,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; APPLY TAG on each object, MANAGE or ownership, checked by the portal; MANAGE for a mask (in the handler)",
         "x-rate-class": "write",
@@ -10468,7 +10468,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE to ask about another person (in the handler)",
         "x-rate-class": "query"
@@ -10632,7 +10632,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -10759,7 +10759,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; MANAGE on the catalog (in the handler)",
         "x-rate-class": "write",
@@ -10915,7 +10915,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11091,7 +11091,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11217,7 +11217,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11364,7 +11364,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11492,7 +11492,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -11659,7 +11659,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "search"
@@ -11824,7 +11824,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -11979,7 +11979,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12119,7 +12119,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12258,7 +12258,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the workspace's operate action (in the handler)",
         "x-rate-class": "write",
@@ -12408,7 +12408,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12573,7 +12573,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -12585,7 +12585,7 @@
           "lineage"
         ],
         "summary": "Lineage Get",
-        "description": "The table's lineage graph up and down to ``depth``, or one ``column``'s; what the caller cannot read is\ncounted in ``hidden`` and not named (design L4).\n\nStability: preview. Permission: data.view; view on the workspace; tables the caller cannot read are hidden (in the handler).",
+        "description": "The table's lineage graph up and down to ``depth``, or one ``column``'s; what the caller cannot read is\ncounted in ``hidden`` and not named (design L4). ``columns=all`` adds every column edge between the returned\ntables (capped at 5,000; ``truncated``). Each column edge names its ``producers``; where dbt built the target,\ndbt's type wins and an engine that typed the pair otherwise is listed in ``also_typed``. ``indirect=dataset``\n(with ``column`` or ``columns=all``) adds the dataset-level dependencies, such as a Spark join key or filter\ncolumn, drawn to every column of their target; without it they are left out. Impact always counts them.\n\nStability: preview. Permission: data.view; view on the workspace; tables the caller cannot read are hidden (in the handler).",
         "operationId": "lineage_get",
         "parameters": [
           {
@@ -12666,6 +12666,40 @@
                 }
               ],
               "title": "Column"
+            }
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "all",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Columns"
+            }
+          },
+          {
+            "name": "indirect",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "dataset",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Indirect"
             }
           },
           {
@@ -12799,7 +12833,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; tables the caller cannot read are hidden (in the handler)",
         "x-rate-class": "read"
@@ -12964,7 +12998,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13146,7 +13180,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13311,7 +13345,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13493,7 +13527,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -13675,7 +13709,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -13832,7 +13866,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -14015,7 +14049,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14184,7 +14218,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14366,7 +14400,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -14521,7 +14555,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "write",
@@ -14704,7 +14738,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -14870,7 +14904,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15044,7 +15078,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15171,7 +15205,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; operate on the workspace",
         "x-rate-class": "query",
@@ -15319,7 +15353,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15466,7 +15500,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -15636,7 +15670,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -15783,7 +15817,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; the owner group is one of the workspace's groups the caller is in (in the handler)",
         "x-rate-class": "write",
@@ -15913,7 +15947,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -16078,7 +16112,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16227,7 +16261,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -16387,7 +16421,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16522,7 +16556,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -16711,7 +16745,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -16846,7 +16880,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -17007,7 +17041,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -17166,7 +17200,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -17337,7 +17371,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -17483,7 +17517,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; the action's privilege on the project (in the handler)",
         "x-rate-class": "query",
@@ -17680,7 +17714,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -17854,7 +17888,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW, or CAN VIEW on a job whose task ran it (in the handler)",
         "x-rate-class": "read"
@@ -18037,7 +18071,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; as the run (in the handler)",
         "x-rate-class": "read"
@@ -18174,7 +18208,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; as the run (in the handler)",
         "x-rate-class": "write",
@@ -18312,7 +18346,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; who started it, or CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -18472,7 +18506,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; as the run (in the handler)",
         "x-rate-class": "read"
@@ -18619,7 +18653,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -18756,7 +18790,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -18894,7 +18928,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -19032,7 +19066,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT (in the handler)",
         "x-rate-class": "write",
@@ -19192,7 +19226,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -19356,7 +19390,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read"
@@ -19510,7 +19544,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE (in the handler)",
         "x-rate-class": "write",
@@ -19686,7 +19720,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "query"
@@ -19823,7 +19857,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN (in the handler)",
         "x-rate-class": "write",
@@ -19969,7 +20003,7 @@
         },
         "x-paged": false,
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW; the caller's own (in the handler)",
         "x-rate-class": "read"
@@ -20116,7 +20150,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -20254,7 +20288,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write"
@@ -20384,7 +20418,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; the kernel's owner (in the handler)",
         "x-rate-class": "write"
@@ -20538,7 +20572,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN RUN; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -20669,7 +20703,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; the kernel's owner (in the handler)",
         "x-rate-class": "write",
@@ -20842,7 +20876,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW (in the handler)",
         "x-rate-class": "read",
@@ -20980,7 +21014,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "internal",
         "x-permission": "data.view; view on the workspace; CAN VIEW; document updates CAN EDIT (in the handler)",
         "x-rate-class": "write"
@@ -21176,7 +21210,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -21367,7 +21401,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21574,7 +21608,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -21738,7 +21772,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write"
@@ -21911,7 +21945,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -22087,7 +22121,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -22250,7 +22284,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the job (in the handler)",
         "x-rate-class": "write",
@@ -22439,7 +22473,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -22623,7 +22657,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read",
@@ -22770,7 +22804,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -22938,7 +22972,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE RUN (in the handler)",
         "x-rate-class": "write",
@@ -23156,7 +23190,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; CAN VIEW on the job; paths: READ VOLUME (in the handler)",
         "x-rate-class": "read",
@@ -23340,7 +23374,7 @@
         },
         "x-paged": false,
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; CAN VIEW on the job (in the handler)",
         "x-rate-class": "search"
@@ -23495,7 +23529,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; CAN MANAGE RUN (in the handler)",
         "x-rate-class": "write",
@@ -23660,7 +23694,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -23814,7 +23848,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -23959,7 +23993,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN MANAGE on the project (in the handler)",
         "x-rate-class": "write",
@@ -24104,7 +24138,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24268,7 +24302,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -24422,7 +24456,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24566,7 +24600,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.admin; data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24703,7 +24737,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write"
@@ -24840,7 +24874,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace; CAN EDIT on the project (in the handler)",
         "x-rate-class": "write",
@@ -24978,7 +25012,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "write",
@@ -25166,7 +25200,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -25353,7 +25387,7 @@
           }
         },
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -25526,7 +25560,7 @@
         },
         "x-paged": false,
         "x-service": "jobs",
-        "x-service-version": "1.10",
+        "x-service-version": "1.11",
         "x-stability": "stable",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "read"
@@ -36538,7 +36572,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "preview",
         "x-permission": "data.view",
         "x-rate-class": "read",
@@ -37290,7 +37324,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37427,7 +37461,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37555,7 +37589,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37682,7 +37716,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37801,7 +37835,7 @@
         },
         "x-paged": false,
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -37927,7 +37961,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -38047,7 +38081,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -38174,7 +38208,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "preview",
         "x-permission": "data.admin",
         "x-rate-class": "admin",
@@ -38301,7 +38335,7 @@
           }
         },
         "x-service": "governance",
-        "x-service-version": "1.24",
+        "x-service-version": "1.28",
         "x-stability": "stable",
         "x-permission": "public or key; a lineage producer's key (in the handler)",
         "x-rate-class": "write"
@@ -38441,7 +38475,7 @@
           "audit"
         ],
         "summary": "Audit Ingest Post",
-        "description": "Up to 5,000 Ranger or SQE audit records (a JSON array, one object or NDJSON) with the audit ingest key. New\nrecords join the audit chain; repeats are counted as duplicates, unreadable ones as skipped; a store failure is\n503, so the shipper retries.\n\nStability: stable. Permission: public or key; the audit ingest key and x-portal-audit-schema (in the handler).",
+        "description": "Up to 5,000 Ranger, SQE or Polaris access-log records (a JSON array, one object or NDJSON) with the audit\ningest key. New records join the audit chain; repeats are counted as duplicates, unreadable ones as skipped; a\nstore failure is 503, so the shipper retries.\n\nStability: stable. Permission: public or key; the audit ingest key and x-portal-audit-schema (in the handler).",
         "operationId": "audit_ingest",
         "parameters": [
           {
@@ -38451,7 +38485,8 @@
             "schema": {
               "enum": [
                 "ranger",
-                "sqe"
+                "sqe",
+                "polaris-access"
               ],
               "type": "string",
               "title": "Source"
@@ -38828,7 +38863,7 @@
           }
         },
         "x-service": "projects",
-        "x-service-version": "1.8",
+        "x-service-version": "1.9",
         "x-stability": "preview",
         "x-permission": "public or key; a docs ticket: one run, one use, a minute (in the handler)",
         "x-rate-class": "read"
@@ -40874,6 +40909,51 @@
         ],
         "title": "ColumnInfo"
       },
+      "ColumnQualityOut": {
+        "properties": {
+          "column": {
+            "type": "string",
+            "title": "Column"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "passed",
+              "warning",
+              "failed",
+              "error"
+            ],
+            "title": "Status"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source"
+          },
+          "failures": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failures"
+          }
+        },
+        "type": "object",
+        "required": [
+          "column",
+          "status",
+          "source"
+        ],
+        "title": "ColumnQualityOut",
+        "description": "A column's checks in the latest run of each source (DL-7): the worst outcome, the source that gave it and, for a\nfailed or warned check, its failing row count."
+      },
       "ColumnRef": {
         "properties": {
           "catalog": {
@@ -41406,6 +41486,22 @@
             "type": "string",
             "title": "Status"
           },
+          "transitions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Transitions",
+            "default": []
+          },
+          "sla": {
+            "items": {
+              "$ref": "#/components/schemas/SlaOut"
+            },
+            "type": "array",
+            "title": "Sla",
+            "default": []
+          },
           "odcs_id": {
             "type": "string",
             "title": "Odcs Id"
@@ -41462,6 +41558,17 @@
             },
             "type": "array",
             "title": "Warnings"
+          },
+          "dbt_import": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DbtImportOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set on the answer to an import from dbt"
           }
         },
         "type": "object",
@@ -41504,6 +41611,16 @@
             "title": "From Schema",
             "default": false
           },
+          "from_dbt": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FromDbt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "version": {
             "anyOf": [
               {
@@ -41520,7 +41637,7 @@
         "additionalProperties": false,
         "type": "object",
         "title": "ContractPut",
-        "description": "The contract as ODCS YAML, or ``from_schema`` to draft one from the table's columns and classification (only\nwhen the table has none). ``version`` is the version read: without it the table must have no contract yet (409\n``conflict`` otherwise); with it the contract must still be at that version (409 ``conflict`` otherwise)."
+        "description": "The contract as ODCS YAML, ``from_schema`` to draft one from the table's columns and classification (only\nwhen the table has none), or ``from_dbt`` to build it from a dbt model (with ``version``: import again, replacing\nonly what came from dbt). ``version`` is the version read: without it the table must have no contract yet (409\n``conflict`` otherwise); with it the contract must still be at that version (409 ``conflict`` otherwise)."
       },
       "ContractStatusOut": {
         "properties": {
@@ -41606,6 +41723,41 @@
         ],
         "title": "ContractStatusOut",
         "description": "The table's contract and its last full run, for the table header (OpenSpec change data-table-contract-status)."
+      },
+      "DbtImportOut": {
+        "properties": {
+          "run": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Run"
+          },
+          "project": {
+            "type": "string",
+            "title": "Project"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model",
+            "description": "The model's unique_id"
+          },
+          "dropped": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Dropped",
+            "description": "Columns dbt lists that the table does not have; left out"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run",
+          "project",
+          "model",
+          "dropped"
+        ],
+        "title": "DbtImportOut",
+        "description": "Where an import from dbt came from (data-contracts-gap D5)."
       },
       "DeadLetterOut": {
         "properties": {
@@ -43167,6 +43319,39 @@
         ],
         "title": "FindingOut"
       },
+      "FromDbt": {
+        "properties": {
+          "run": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "FromDbt",
+        "description": "Build the contract from a dbt model (data-contracts-gap D5). ``run``: a dbt run of a project the caller may\nsee; none: the newest succeeded one whose manifest has a model for the table. ``model``: a unique_id or a name;\nnone: the model that builds the table."
+      },
       "GatewayAuditOut": {
         "properties": {
           "accepted": {
@@ -44303,8 +44488,24 @@
       "InboxItem": {
         "properties": {
           "contract_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Contract Id"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source",
+            "default": "contract"
           },
           "namespace": {
             "type": "string",
@@ -47078,6 +47279,27 @@
           "stale": {
             "type": "boolean",
             "title": "Stale"
+          },
+          "producers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Producers",
+            "default": []
+          },
+          "also_typed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Also Typed",
+            "default": []
+          },
+          "static": {
+            "type": "boolean",
+            "title": "Static",
+            "default": false
           }
         },
         "type": "object",
@@ -47767,6 +47989,22 @@
             "type": "string",
             "format": "date-time",
             "title": "At"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceQualityOut"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/ColumnQualityOut"
+            },
+            "type": "array",
+            "title": "Columns",
+            "default": []
           }
         },
         "type": "object",
@@ -48291,6 +48529,17 @@
           "available": {
             "type": "boolean",
             "title": "Available"
+          },
+          "cannot_run": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cannot Run"
           }
         },
         "type": "object",
@@ -48850,6 +49099,21 @@
                 "type": "null"
               }
             ]
+          },
+          "run_as": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "owner",
+                  "service_principal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run As"
           }
         },
         "additionalProperties": false,
@@ -50361,6 +50625,34 @@
             ],
             "description": "The catalog scope sent to SQE; null with PORTAL_DATA_RUN_CATALOG_SCOPE off"
           },
+          "run_as": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "owner",
+                  "service_principal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run As",
+            "description": "The job identity it ran as; null: the starter's own token (started_by)"
+          },
+          "identity_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identity Label",
+            "description": "With run_as: the username the identity's token named"
+          },
           "changed": {
             "anyOf": [
               {
@@ -51509,7 +51801,14 @@
             "title": "Score"
           },
           "contract_version": {
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Contract Version"
           },
           "contract_changed": {
@@ -51545,12 +51844,55 @@
             "title": "Scope",
             "default": "full"
           },
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source",
+            "default": "contract"
+          },
+          "warned": {
+            "type": "integer",
+            "title": "Warned",
+            "default": 0
+          },
+          "job_run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Run Id"
+          },
           "checks": {
             "items": {
               "$ref": "#/components/schemas/CheckOut"
             },
             "type": "array",
             "title": "Checks"
+          },
+          "table_state": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "published",
+                  "unchanged",
+                  "refused",
+                  "skipped"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Table State"
           }
         },
         "type": "object",
@@ -51663,7 +52005,14 @@
             "title": "Score"
           },
           "contract_version": {
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Contract Version"
           },
           "contract_changed": {
@@ -51698,6 +52047,32 @@
             "type": "string",
             "title": "Scope",
             "default": "full"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source",
+            "default": "contract"
+          },
+          "warned": {
+            "type": "integer",
+            "title": "Warned",
+            "default": 0
+          },
+          "job_run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Run Id"
           }
         },
         "type": "object",
@@ -53109,6 +53484,62 @@
         ],
         "title": "ShortSecrets"
       },
+      "SlaOut": {
+        "properties": {
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          },
+          "property": {
+            "type": "string",
+            "title": "Property"
+          },
+          "value": {
+            "title": "Value"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "element": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Element"
+          },
+          "checked": {
+            "type": "boolean",
+            "title": "Checked"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "property",
+          "checked"
+        ],
+        "title": "SlaOut",
+        "description": "An ODCS ``slaProperties`` entry; ``checked`` when a run evaluates it (a freshness SLA, data-contracts-gap D4)."
+      },
       "SnapshotInfo": {
         "properties": {
           "snapshot_id": {
@@ -53260,6 +53691,59 @@
           "items"
         ],
         "title": "SnapshotList"
+      },
+      "SourceQualityOut": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "passed",
+              "warning",
+              "failed",
+              "error"
+            ],
+            "title": "Status"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Checked At"
+          },
+          "run_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Run Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "status",
+          "score",
+          "checked_at",
+          "run_id"
+        ],
+        "title": "SourceQualityOut",
+        "description": "The latest quality run of one source on a table (data-dbt-lineage-quality DL-7, design D4)."
       },
       "SparkOut": {
         "properties": {
@@ -56331,6 +56815,23 @@
               }
             ],
             "title": "Last Write"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "dbt"
+            ],
+            "title": "Source",
+            "default": "contract"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceQualityOut"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
           }
         },
         "type": "object",

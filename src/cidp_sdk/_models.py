@@ -4,7 +4,7 @@ Do not edit: `make sdk-models` writes this file (scripts/sdk_models.py). Unknown
 accepts values added within v1, so a newer service does not break this SDK.
 """
 
-# contract sha256: 0d19b54c268cf739949ed4a33ee2b095c67c58e27db299f3d3b15be6a208e7f1
+# contract sha256: 6ef3c048ef311933ab83c89fc13a4418dc111c2700bf4142a4e7111e246dcdcb
 # ruff: noqa: E501
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-__all__ = ['AlertOut', 'AlertStatus', 'Alerts', 'AssignedTagOut', 'AuditEvents', 'AuditIngestOut', 'BundleEntryOut', 'BundleTargetOut', 'CatalogBindingInfo', 'CatalogBindingList', 'CatalogBindingUpdate', 'CatalogCreate', 'CatalogInfo', 'CatalogList', 'CatalogScope', 'CatalogUpdate', 'ChangeIn', 'CheckOut', 'ClassificationSuggestionOut', 'ClassificationSuggestions', 'ClassificationUpdate', 'ColumnInfo', 'ColumnRef', 'ColumnSchema', 'ColumnStatsOut', 'ConfigInfo', 'ConflictingMaskOut', 'ContractListItem', 'ContractOut', 'ContractPut', 'ContractStatusOut', 'DeadLetterOut', 'DeadLetters', 'Deliveries', 'DeliveryOut', 'DeploymentIn', 'DeploymentOut', 'DeploymentValidateIn', 'DeploymentValidateOut', 'DestinationOut', 'DestinationWrite', 'DestroyOut', 'DetectionRunOut', 'DigestOut', 'DigestWorkspace', 'DriftOut', 'ErrorInfo', 'EventDetail', 'EventOut', 'ExplainOut', 'ExportCheck', 'FileUsageList', 'FileUsageOut', 'GatewayAuditOut', 'GitCredentialOut', 'GitOAuthComplete', 'GitOAuthStartOut', 'GitProviderOut', 'GitProviders', 'GitToken', 'GlossaryImport', 'GlossaryTermCreate', 'GlossaryTermHistory', 'GlossaryTermStatus', 'GlossaryTermUpdate', 'GlossaryTerms', 'GovernanceChange', 'GovernanceChanges', 'GrantOut', 'GroupInfo', 'Groups', 'HistoryEntry', 'HistoryEntryList', 'IdentityRemovedOut', 'ImpactItemOut', 'ImpactOut', 'ImportOut', 'InactiveOut', 'InboxItem', 'InboxOut', 'IngestLedgerItem', 'IngestLedgerList', 'IngestLedgerSummary', 'IngestOut', 'ItemChangeOut', 'JobBuilderCheckIn', 'JobBuilderCheckOut', 'JobBuilderExportIn', 'JobBuilderExportOut', 'JobBuilderImportIn', 'JobBuilderImportOut', 'JobBuilderJobOut', 'JobEventPending', 'JobEventTriggerOut', 'JobEventTypeOut', 'JobForEachOut', 'JobGrantIn', 'JobGrantOut', 'JobInfo', 'JobList', 'JobPermissionsIn', 'JobPermissionsOut', 'JobRunEventOut', 'JobRunInfo', 'JobRunList', 'JobRunStatsOut', 'JobTaskOut', 'JobTaskRunInfo', 'JobUpdate', 'JobsConsentComplete', 'JobsConsentStartOut', 'JobsDeployOut', 'JobsIdentityOut', 'JobsProblemOut', 'JobsRevokedOut', 'JobsSummaryOut', 'LastDeliveryOut', 'Limits', 'LimitsOut', 'LineageColumnEdgeOut', 'LineageEdgeOut', 'LineageGraphOut', 'LineageJobOut', 'LineageNodeOut', 'LineageStatusOut', 'LinkOut', 'MaskChangeOut', 'MaskConflictOut', 'MaskOut', 'MeOut', 'MyGitCredentials', 'MySecrets', 'NodeQualityOut', 'NotificationsOut', 'OwnerOut', 'PermissionsChangeItem', 'PermissionsInfo', 'PermissionsOut', 'PermissionsUpdate', 'PreviewOut', 'PrincipalIn', 'PrincipalOut', 'PrivilegeAssignment', 'ProducerCreate', 'ProducerCreatedOut', 'ProducerOut', 'Producers', 'ProfileOut', 'ProfileSummaryOut', 'ProjectActionOut', 'ProjectActionResult', 'ProjectActionRun', 'ProjectActions', 'ProjectBranchCreate', 'ProjectBranchName', 'ProjectBranchOut', 'ProjectCommit', 'ProjectCommitCreate', 'ProjectCommitOut', 'ProjectCreate', 'ProjectCreated', 'ProjectDetail', 'ProjectDiff', 'ProjectDiffOut', 'ProjectDocsTicket', 'ProjectExplainOut', 'ProjectFileCreate', 'ProjectFileOut', 'ProjectFileSave', 'ProjectFiles', 'ProjectGrantIn', 'ProjectGrantOut', 'ProjectHead', 'ProjectHistory', 'ProjectInfo', 'ProjectLastRun', 'ProjectList', 'ProjectParamOut', 'ProjectPermissionsOut', 'ProjectPermissionsSet', 'ProjectPullOut', 'ProjectRunArtifact', 'ProjectRunInfo', 'ProjectRunList', 'ProjectScaffoldOut', 'ProjectTreeEntry', 'PropertyOut', 'QualityRunCreate', 'QualityRuns', 'QualitySummary', 'QueryEngine', 'QueryEngines', 'QueryItemOut', 'QueryOut', 'QueryStatsOut', 'RecentOut', 'RemoteBranch', 'RemoteBranches', 'RemovedOut', 'ResultManifest', 'ResultPage', 'RowFilterOut', 'RuleOut', 'RunCatalogScope', 'RunCatalogScopeInfo', 'RunNow', 'RunOut', 'RunScopeCapIn', 'RunScopeCapOut', 'RunSummaryOut', 'SampleColumn', 'SampleInfo', 'SavedQueryIn', 'SavedQueryList', 'SavedQueryOut', 'SavedQueryUpdate', 'SchemaCreate', 'SchemaInfo', 'SchemaList', 'SearchGroup', 'SearchHit', 'SearchOut', 'SearchResults', 'SearchTable', 'SearchTerm', 'SecretExplainOut', 'SecretGrantIn', 'SecretGrantOut', 'SecretOut', 'SecretPermissionsOut', 'SecretPermissionsUpdate', 'SecretRewrapOut', 'SecretScopeCreate', 'SecretScopeOut', 'SecretScopes', 'SecretUseOut', 'SecretValue', 'Secrets', 'SelectAdminMissing', 'SelectBackfillOut', 'SelectCatalog', 'SelectCoverageOut', 'SelectMissing', 'SessionPip', 'ShortSecretOut', 'ShortSecrets', 'SnapshotInfo', 'SnapshotList', 'SparkOut', 'SqeOut', 'StatementColumn', 'StatementExecute', 'StatementExplain', 'StatementFailure', 'StatementInfo', 'StatementRows', 'StatementSubmit', 'StatementTranspile', 'StorageLocationIn', 'StorageLocationInfo', 'StorageLocationList', 'StorageLocationPatch', 'StrayOut', 'StraysOut', 'StraysRemove', 'SubjectEraseOut', 'SubjectExportOut', 'SuggestionOut', 'SuggestionSourceOut', 'SuggestionsApply', 'SuggestionsOut', 'SystemJobRunOut', 'SystemKernelOut', 'SystemOut', 'SystemRunOut', 'SystemTagOut', 'TableContracts', 'TableInfo', 'TableList', 'TableSummary', 'TableTermOut', 'TableTerms', 'TagOnColumnOut', 'TagOut', 'TagsOut', 'TemplateOut', 'TemplateRepoChange', 'TemplateRepoCreate', 'TemplateRepoOut', 'TemplateRepos', 'TemplateTypeOut', 'TemplatesOut', 'TermOut', 'TermVersionOut', 'TestOut', 'TranspileOut', 'TranspileReason', 'TranspiledStatement', 'Upload', 'UploadLoad', 'Uploads', 'UpstreamProblemOut', 'UpstreamProblemsOut', 'VerificationOut', 'VerificationRun', 'VerifyOut', 'ViewInfo', 'ViewList', 'VolumeCreate', 'VolumeExplanation', 'VolumeFile', 'VolumeFiles', 'VolumeGrant', 'VolumeGrantInfo', 'VolumeInfo', 'VolumePermissions', 'VolumePermissionsUpdate', 'Volumes', 'WorkspaceCatalogCreate', 'WorkspaceCatalogInfo', 'WorkspaceCatalogList', 'WorkspaceCreate', 'WorkspaceInfo', 'WorkspaceJobInfo', 'WorkspaceJobList', 'WorkspaceJobRunInfo', 'WorkspaceJobRunList', 'WorkspaceJobStats', 'WorkspaceList', 'WorkspaceStorageOut', 'WorkspaceSummaryOut', 'WorkspaceUpdate']
+__all__ = ['AlertOut', 'AlertStatus', 'Alerts', 'AssignedTagOut', 'AuditEvents', 'AuditIngestOut', 'BundleEntryOut', 'BundleTargetOut', 'CatalogBindingInfo', 'CatalogBindingList', 'CatalogBindingUpdate', 'CatalogCreate', 'CatalogInfo', 'CatalogList', 'CatalogScope', 'CatalogUpdate', 'ChangeIn', 'CheckOut', 'ClassificationSuggestionOut', 'ClassificationSuggestions', 'ClassificationUpdate', 'ColumnInfo', 'ColumnQualityOut', 'ColumnRef', 'ColumnSchema', 'ColumnStatsOut', 'ConfigInfo', 'ConflictingMaskOut', 'ContractListItem', 'ContractOut', 'ContractPut', 'ContractStatusOut', 'DbtImportOut', 'DeadLetterOut', 'DeadLetters', 'Deliveries', 'DeliveryOut', 'DeploymentIn', 'DeploymentOut', 'DeploymentValidateIn', 'DeploymentValidateOut', 'DestinationOut', 'DestinationWrite', 'DestroyOut', 'DetectionRunOut', 'DigestOut', 'DigestWorkspace', 'DriftOut', 'ErrorInfo', 'EventDetail', 'EventOut', 'ExplainOut', 'ExportCheck', 'FileUsageList', 'FileUsageOut', 'FromDbt', 'GatewayAuditOut', 'GitCredentialOut', 'GitOAuthComplete', 'GitOAuthStartOut', 'GitProviderOut', 'GitProviders', 'GitToken', 'GlossaryImport', 'GlossaryTermCreate', 'GlossaryTermHistory', 'GlossaryTermStatus', 'GlossaryTermUpdate', 'GlossaryTerms', 'GovernanceChange', 'GovernanceChanges', 'GrantOut', 'GroupInfo', 'Groups', 'HistoryEntry', 'HistoryEntryList', 'IdentityRemovedOut', 'ImpactItemOut', 'ImpactOut', 'ImportOut', 'InactiveOut', 'InboxItem', 'InboxOut', 'IngestLedgerItem', 'IngestLedgerList', 'IngestLedgerSummary', 'IngestOut', 'ItemChangeOut', 'JobBuilderCheckIn', 'JobBuilderCheckOut', 'JobBuilderExportIn', 'JobBuilderExportOut', 'JobBuilderImportIn', 'JobBuilderImportOut', 'JobBuilderJobOut', 'JobEventPending', 'JobEventTriggerOut', 'JobEventTypeOut', 'JobForEachOut', 'JobGrantIn', 'JobGrantOut', 'JobInfo', 'JobList', 'JobPermissionsIn', 'JobPermissionsOut', 'JobRunEventOut', 'JobRunInfo', 'JobRunList', 'JobRunStatsOut', 'JobTaskOut', 'JobTaskRunInfo', 'JobUpdate', 'JobsConsentComplete', 'JobsConsentStartOut', 'JobsDeployOut', 'JobsIdentityOut', 'JobsProblemOut', 'JobsRevokedOut', 'JobsSummaryOut', 'LastDeliveryOut', 'Limits', 'LimitsOut', 'LineageColumnEdgeOut', 'LineageEdgeOut', 'LineageGraphOut', 'LineageJobOut', 'LineageNodeOut', 'LineageStatusOut', 'LinkOut', 'MaskChangeOut', 'MaskConflictOut', 'MaskOut', 'MeOut', 'MyGitCredentials', 'MySecrets', 'NodeQualityOut', 'NotificationsOut', 'OwnerOut', 'PermissionsChangeItem', 'PermissionsInfo', 'PermissionsOut', 'PermissionsUpdate', 'PreviewOut', 'PrincipalIn', 'PrincipalOut', 'PrivilegeAssignment', 'ProducerCreate', 'ProducerCreatedOut', 'ProducerOut', 'Producers', 'ProfileOut', 'ProfileSummaryOut', 'ProjectActionOut', 'ProjectActionResult', 'ProjectActionRun', 'ProjectActions', 'ProjectBranchCreate', 'ProjectBranchName', 'ProjectBranchOut', 'ProjectCommit', 'ProjectCommitCreate', 'ProjectCommitOut', 'ProjectCreate', 'ProjectCreated', 'ProjectDetail', 'ProjectDiff', 'ProjectDiffOut', 'ProjectDocsTicket', 'ProjectExplainOut', 'ProjectFileCreate', 'ProjectFileOut', 'ProjectFileSave', 'ProjectFiles', 'ProjectGrantIn', 'ProjectGrantOut', 'ProjectHead', 'ProjectHistory', 'ProjectInfo', 'ProjectLastRun', 'ProjectList', 'ProjectParamOut', 'ProjectPermissionsOut', 'ProjectPermissionsSet', 'ProjectPullOut', 'ProjectRunArtifact', 'ProjectRunInfo', 'ProjectRunList', 'ProjectScaffoldOut', 'ProjectTreeEntry', 'PropertyOut', 'QualityRunCreate', 'QualityRuns', 'QualitySummary', 'QueryEngine', 'QueryEngines', 'QueryItemOut', 'QueryOut', 'QueryStatsOut', 'RecentOut', 'RemoteBranch', 'RemoteBranches', 'RemovedOut', 'ResultManifest', 'ResultPage', 'RowFilterOut', 'RuleOut', 'RunCatalogScope', 'RunCatalogScopeInfo', 'RunNow', 'RunOut', 'RunScopeCapIn', 'RunScopeCapOut', 'RunSummaryOut', 'SampleColumn', 'SampleInfo', 'SavedQueryIn', 'SavedQueryList', 'SavedQueryOut', 'SavedQueryUpdate', 'SchemaCreate', 'SchemaInfo', 'SchemaList', 'SearchGroup', 'SearchHit', 'SearchOut', 'SearchResults', 'SearchTable', 'SearchTerm', 'SecretExplainOut', 'SecretGrantIn', 'SecretGrantOut', 'SecretOut', 'SecretPermissionsOut', 'SecretPermissionsUpdate', 'SecretRewrapOut', 'SecretScopeCreate', 'SecretScopeOut', 'SecretScopes', 'SecretUseOut', 'SecretValue', 'Secrets', 'SelectAdminMissing', 'SelectBackfillOut', 'SelectCatalog', 'SelectCoverageOut', 'SelectMissing', 'SessionPip', 'ShortSecretOut', 'ShortSecrets', 'SlaOut', 'SnapshotInfo', 'SnapshotList', 'SourceQualityOut', 'SparkOut', 'SqeOut', 'StatementColumn', 'StatementExecute', 'StatementExplain', 'StatementFailure', 'StatementInfo', 'StatementRows', 'StatementSubmit', 'StatementTranspile', 'StorageLocationIn', 'StorageLocationInfo', 'StorageLocationList', 'StorageLocationPatch', 'StrayOut', 'StraysOut', 'StraysRemove', 'SubjectEraseOut', 'SubjectExportOut', 'SuggestionOut', 'SuggestionSourceOut', 'SuggestionsApply', 'SuggestionsOut', 'SystemJobRunOut', 'SystemKernelOut', 'SystemOut', 'SystemRunOut', 'SystemTagOut', 'TableContracts', 'TableInfo', 'TableList', 'TableSummary', 'TableTermOut', 'TableTerms', 'TagOnColumnOut', 'TagOut', 'TagsOut', 'TemplateOut', 'TemplateRepoChange', 'TemplateRepoCreate', 'TemplateRepoOut', 'TemplateRepos', 'TemplateTypeOut', 'TemplatesOut', 'TermOut', 'TermVersionOut', 'TestOut', 'TranspileOut', 'TranspileReason', 'TranspiledStatement', 'Upload', 'UploadLoad', 'Uploads', 'UpstreamProblemOut', 'UpstreamProblemsOut', 'VerificationOut', 'VerificationRun', 'VerifyOut', 'ViewInfo', 'ViewList', 'VolumeCreate', 'VolumeExplanation', 'VolumeFile', 'VolumeFiles', 'VolumeGrant', 'VolumeGrantInfo', 'VolumeInfo', 'VolumePermissions', 'VolumePermissionsUpdate', 'Volumes', 'WorkspaceCatalogCreate', 'WorkspaceCatalogInfo', 'WorkspaceCatalogList', 'WorkspaceCreate', 'WorkspaceInfo', 'WorkspaceJobInfo', 'WorkspaceJobList', 'WorkspaceJobRunInfo', 'WorkspaceJobRunList', 'WorkspaceJobStats', 'WorkspaceList', 'WorkspaceStorageOut', 'WorkspaceSummaryOut', 'WorkspaceUpdate']
 
 
 class _Model(BaseModel):
@@ -206,6 +206,15 @@ class ColumnInfo(_Model):
     classification_explicit: bool = Field(default=False)
 
 
+class ColumnQualityOut(_Model):
+    "A column's checks in the latest run of each source (DL-7): the worst outcome, the source that gave it and, for a\nfailed or warned check, its failing row count."
+
+    column: str
+    status: Literal['passed', 'warning', 'failed', 'error'] | str
+    source: Literal['contract', 'dbt'] | str
+    failures: int | None = None
+
+
 class ColumnRef(_Model):
     catalog: str | None = Field(default=None, description="One of the workspace's catalogs. None on a create: the home catalog; on an update: the catalog of the term's link to this column (422 link_catalog_ambiguous when it links it in several), else the home catalog")
     namespace: str
@@ -269,6 +278,8 @@ class ContractOut(_Model):
     yaml: str
     version: int
     status: str
+    transitions: list[str] = Field(default=[])
+    sla: list[SlaOut] = Field(default=[])
     odcs_id: str
     odcs_version: str
     owner_group: str | None
@@ -279,13 +290,15 @@ class ContractOut(_Model):
     checks: int
     not_checked: int
     warnings: list[str]
+    dbt_import: DbtImportOut | None = Field(default=None, description='Set on the answer to an import from dbt')
 
 
 class ContractPut(_Model):
-    "The contract as ODCS YAML, or ``from_schema`` to draft one from the table's columns and classification (only\nwhen the table has none). ``version`` is the version read: without it the table must have no contract yet (409\n``conflict`` otherwise); with it the contract must still be at that version (409 ``conflict`` otherwise)."
+    "The contract as ODCS YAML, ``from_schema`` to draft one from the table's columns and classification (only\nwhen the table has none), or ``from_dbt`` to build it from a dbt model (with ``version``: import again, replacing\nonly what came from dbt). ``version`` is the version read: without it the table must have no contract yet (409\n``conflict`` otherwise); with it the contract must still be at that version (409 ``conflict`` otherwise)."
 
     yaml: str | None = None
     from_schema: bool = Field(default=False)
+    from_dbt: FromDbt | None = None
     version: int | None = None
 
 
@@ -300,6 +313,15 @@ class ContractStatusOut(_Model):
     total: int | None
     run_at: datetime | None
     contract_changed: bool
+
+
+class DbtImportOut(_Model):
+    "Where an import from dbt came from (data-contracts-gap D5)."
+
+    run: str
+    project: str
+    model: str = Field(description="The model's unique_id")
+    dropped: list[str] = Field(description='Columns dbt lists that the table does not have; left out')
 
 
 class DeadLetterOut(_Model):
@@ -537,6 +559,13 @@ class FileUsageOut(_Model):
     enabled: bool
 
 
+class FromDbt(_Model):
+    "Build the contract from a dbt model (data-contracts-gap D5). ``run``: a dbt run of a project the caller may\nsee; none: the newest succeeded one whose manifest has a model for the table. ``model``: a unique_id or a name;\nnone: the model that builds the table."
+
+    run: str | None = None
+    model: str | None = None
+
+
 class GatewayAuditOut(_Model):
     accepted: int
 
@@ -733,7 +762,8 @@ class InactiveOut(_Model):
 
 
 class InboxItem(_Model):
-    contract_id: str
+    contract_id: str | None
+    source: Literal['contract', 'dbt'] | str = Field(default='contract')
     namespace: str
     table: str
     run_id: str
@@ -1158,6 +1188,9 @@ class LineageColumnEdgeOut(_Model):
     subtype: str
     masked: bool
     stale: bool
+    producers: list[str] = Field(default=[])
+    also_typed: list[str] = Field(default=[])
+    static: bool = Field(default=False)
 
 
 class LineageEdgeOut(_Model):
@@ -1264,6 +1297,8 @@ class NodeQualityOut(_Model):
     status: str
     score: float | None
     at: datetime
+    sources: list[SourceQualityOut] = Field(default=[])
+    columns: list[ColumnQualityOut] = Field(default=[])
 
 
 class NotificationsOut(_Model):
@@ -1345,6 +1380,7 @@ class PrincipalOut(_Model):
     last_used_at: datetime | None = None
     allowed_groups: list[str]
     available: bool
+    cannot_run: str | None = None
 
 
 class PrivilegeAssignment(_Model):
@@ -1434,6 +1470,7 @@ class ProjectActionRun(_Model):
     params: dict[str, Any] | None = None
     catalog: str | None = None
     catalog_scope: CatalogScope | None = None
+    run_as: Literal['owner', 'service_principal'] | str | None = None
 
 
 class ProjectActions(_Model):
@@ -1688,6 +1725,8 @@ class ProjectRunInfo(_Model):
     catalog: str | None = Field(default=None, description='The catalog it started in; null: the home catalog')
     catalog_binding: str | None = None
     catalog_scope: RunCatalogScopeInfo | None = Field(default=None, description='The catalog scope sent to SQE; null with PORTAL_DATA_RUN_CATALOG_SCOPE off')
+    run_as: Literal['owner', 'service_principal'] | str | None = Field(default=None, description="The job identity it ran as; null: the starter's own token (started_by)")
+    identity_label: str | None = Field(default=None, description="With run_as: the username the identity's token named")
     changed: list[str] | None = Field(default=None, description='In a single run: files changed since the last successful run of the action and branch')
     artifacts: list[str] | None = Field(default=None, description='In a single run: the names of its artifacts')
 
@@ -1884,14 +1923,18 @@ class RunOut(_Model):
     failed: int
     errored: int
     score: float | None
-    contract_version: int
+    contract_version: int | None
     contract_changed: bool
     snapshot_id: int | None
     started_at: datetime
     started_by: str
     elapsed_ms: int
     scope: str = Field(default='full')
+    source: Literal['contract', 'dbt'] | str = Field(default='contract')
+    warned: int = Field(default=0)
+    job_run_id: str | None = None
     checks: list[CheckOut]
+    table_state: Literal['published', 'unchanged', 'refused', 'skipped'] | str | None = None
 
 
 class RunScopeCapIn(_Model):
@@ -1913,13 +1956,16 @@ class RunSummaryOut(_Model):
     failed: int
     errored: int
     score: float | None
-    contract_version: int
+    contract_version: int | None
     contract_changed: bool
     snapshot_id: int | None
     started_at: datetime
     started_by: str
     elapsed_ms: int
     scope: str = Field(default='full')
+    source: Literal['contract', 'dbt'] | str = Field(default='contract')
+    warned: int = Field(default=0)
+    job_run_id: str | None = None
 
 
 class SampleColumn(_Model):
@@ -2188,6 +2234,17 @@ class ShortSecrets(_Model):
     items: list[ShortSecretOut]
 
 
+class SlaOut(_Model):
+    "An ODCS ``slaProperties`` entry; ``checked`` when a run evaluates it (a freshness SLA, data-contracts-gap D4)."
+
+    key: str | None
+    property: str
+    value: Any | None = None
+    unit: str | None = None
+    element: str | None = None
+    checked: bool
+
+
 class SnapshotInfo(_Model):
     snapshot_id: int
     parent_snapshot_id: int | None
@@ -2205,6 +2262,16 @@ class SnapshotInfo(_Model):
 class SnapshotList(_Model):
     items: list[SnapshotInfo]
     next_cursor: str | None = None
+
+
+class SourceQualityOut(_Model):
+    "The latest quality run of one source on a table (data-dbt-lineage-quality DL-7, design D4)."
+
+    source: Literal['contract', 'dbt'] | str
+    status: Literal['passed', 'warning', 'failed', 'error'] | str
+    score: float | None
+    checked_at: datetime
+    run_id: str
 
 
 class SparkOut(_Model):
@@ -2694,6 +2761,8 @@ class UpstreamProblemOut(_Model):
     status: str
     last_run_at: datetime
     last_write: datetime | None
+    source: Literal['contract', 'dbt'] | str = Field(default='contract')
+    sources: list[SourceQualityOut] = Field(default=[])
 
 
 class UpstreamProblemsOut(_Model):
@@ -2975,5 +3044,5 @@ class WorkspaceUpdate(_Model):
     default_catalog: str | None = None
 
 
-for _m in (AlertOut, AlertStatus, Alerts, AssignedTagOut, AuditEvents, AuditIngestOut, BundleEntryOut, BundleTargetOut, CatalogBindingInfo, CatalogBindingList, CatalogBindingUpdate, CatalogCreate, CatalogInfo, CatalogList, CatalogScope, CatalogUpdate, ChangeIn, CheckOut, ClassificationSuggestionOut, ClassificationSuggestions, ClassificationUpdate, ColumnInfo, ColumnRef, ColumnSchema, ColumnStatsOut, ConfigInfo, ConflictingMaskOut, ContractListItem, ContractOut, ContractPut, ContractStatusOut, DeadLetterOut, DeadLetters, Deliveries, DeliveryOut, DeploymentIn, DeploymentOut, DeploymentValidateIn, DeploymentValidateOut, DestinationOut, DestinationWrite, DestroyOut, DetectionRunOut, DigestOut, DigestWorkspace, DriftOut, ErrorInfo, EventDetail, EventOut, ExplainOut, ExportCheck, FileUsageList, FileUsageOut, GatewayAuditOut, GitCredentialOut, GitOAuthComplete, GitOAuthStartOut, GitProviderOut, GitProviders, GitToken, GlossaryImport, GlossaryTermCreate, GlossaryTermHistory, GlossaryTermStatus, GlossaryTermUpdate, GlossaryTerms, GovernanceChange, GovernanceChanges, GrantOut, GroupInfo, Groups, HistoryEntry, HistoryEntryList, IdentityRemovedOut, ImpactItemOut, ImpactOut, ImportOut, InactiveOut, InboxItem, InboxOut, IngestLedgerItem, IngestLedgerList, IngestLedgerSummary, IngestOut, ItemChangeOut, JobBuilderCheckIn, JobBuilderCheckOut, JobBuilderExportIn, JobBuilderExportOut, JobBuilderImportIn, JobBuilderImportOut, JobBuilderJobOut, JobEventPending, JobEventTriggerOut, JobEventTypeOut, JobForEachOut, JobGrantIn, JobGrantOut, JobInfo, JobList, JobPermissionsIn, JobPermissionsOut, JobRunEventOut, JobRunInfo, JobRunList, JobRunStatsOut, JobTaskOut, JobTaskRunInfo, JobUpdate, JobsConsentComplete, JobsConsentStartOut, JobsDeployOut, JobsIdentityOut, JobsProblemOut, JobsRevokedOut, JobsSummaryOut, LastDeliveryOut, Limits, LimitsOut, LineageColumnEdgeOut, LineageEdgeOut, LineageGraphOut, LineageJobOut, LineageNodeOut, LineageStatusOut, LinkOut, MaskChangeOut, MaskConflictOut, MaskOut, MeOut, MyGitCredentials, MySecrets, NodeQualityOut, NotificationsOut, OwnerOut, PermissionsChangeItem, PermissionsInfo, PermissionsOut, PermissionsUpdate, PreviewOut, PrincipalIn, PrincipalOut, PrivilegeAssignment, ProducerCreate, ProducerCreatedOut, ProducerOut, Producers, ProfileOut, ProfileSummaryOut, ProjectActionOut, ProjectActionResult, ProjectActionRun, ProjectActions, ProjectBranchCreate, ProjectBranchName, ProjectBranchOut, ProjectCommit, ProjectCommitCreate, ProjectCommitOut, ProjectCreate, ProjectCreated, ProjectDetail, ProjectDiff, ProjectDiffOut, ProjectDocsTicket, ProjectExplainOut, ProjectFileCreate, ProjectFileOut, ProjectFileSave, ProjectFiles, ProjectGrantIn, ProjectGrantOut, ProjectHead, ProjectHistory, ProjectInfo, ProjectLastRun, ProjectList, ProjectParamOut, ProjectPermissionsOut, ProjectPermissionsSet, ProjectPullOut, ProjectRunArtifact, ProjectRunInfo, ProjectRunList, ProjectScaffoldOut, ProjectTreeEntry, PropertyOut, QualityRunCreate, QualityRuns, QualitySummary, QueryEngine, QueryEngines, QueryItemOut, QueryOut, QueryStatsOut, RecentOut, RemoteBranch, RemoteBranches, RemovedOut, ResultManifest, ResultPage, RowFilterOut, RuleOut, RunCatalogScope, RunCatalogScopeInfo, RunNow, RunOut, RunScopeCapIn, RunScopeCapOut, RunSummaryOut, SampleColumn, SampleInfo, SavedQueryIn, SavedQueryList, SavedQueryOut, SavedQueryUpdate, SchemaCreate, SchemaInfo, SchemaList, SearchGroup, SearchHit, SearchOut, SearchResults, SearchTable, SearchTerm, SecretExplainOut, SecretGrantIn, SecretGrantOut, SecretOut, SecretPermissionsOut, SecretPermissionsUpdate, SecretRewrapOut, SecretScopeCreate, SecretScopeOut, SecretScopes, SecretUseOut, SecretValue, Secrets, SelectAdminMissing, SelectBackfillOut, SelectCatalog, SelectCoverageOut, SelectMissing, SessionPip, ShortSecretOut, ShortSecrets, SnapshotInfo, SnapshotList, SparkOut, SqeOut, StatementColumn, StatementExecute, StatementExplain, StatementFailure, StatementInfo, StatementRows, StatementSubmit, StatementTranspile, StorageLocationIn, StorageLocationInfo, StorageLocationList, StorageLocationPatch, StrayOut, StraysOut, StraysRemove, SubjectEraseOut, SubjectExportOut, SuggestionOut, SuggestionSourceOut, SuggestionsApply, SuggestionsOut, SystemJobRunOut, SystemKernelOut, SystemOut, SystemRunOut, SystemTagOut, TableContracts, TableInfo, TableList, TableSummary, TableTermOut, TableTerms, TagOnColumnOut, TagOut, TagsOut, TemplateOut, TemplateRepoChange, TemplateRepoCreate, TemplateRepoOut, TemplateRepos, TemplateTypeOut, TemplatesOut, TermOut, TermVersionOut, TestOut, TranspileOut, TranspileReason, TranspiledStatement, Upload, UploadLoad, Uploads, UpstreamProblemOut, UpstreamProblemsOut, VerificationOut, VerificationRun, VerifyOut, ViewInfo, ViewList, VolumeCreate, VolumeExplanation, VolumeFile, VolumeFiles, VolumeGrant, VolumeGrantInfo, VolumeInfo, VolumePermissions, VolumePermissionsUpdate, Volumes, WorkspaceCatalogCreate, WorkspaceCatalogInfo, WorkspaceCatalogList, WorkspaceCreate, WorkspaceInfo, WorkspaceJobInfo, WorkspaceJobList, WorkspaceJobRunInfo, WorkspaceJobRunList, WorkspaceJobStats, WorkspaceList, WorkspaceStorageOut, WorkspaceSummaryOut, WorkspaceUpdate):
+for _m in (AlertOut, AlertStatus, Alerts, AssignedTagOut, AuditEvents, AuditIngestOut, BundleEntryOut, BundleTargetOut, CatalogBindingInfo, CatalogBindingList, CatalogBindingUpdate, CatalogCreate, CatalogInfo, CatalogList, CatalogScope, CatalogUpdate, ChangeIn, CheckOut, ClassificationSuggestionOut, ClassificationSuggestions, ClassificationUpdate, ColumnInfo, ColumnQualityOut, ColumnRef, ColumnSchema, ColumnStatsOut, ConfigInfo, ConflictingMaskOut, ContractListItem, ContractOut, ContractPut, ContractStatusOut, DbtImportOut, DeadLetterOut, DeadLetters, Deliveries, DeliveryOut, DeploymentIn, DeploymentOut, DeploymentValidateIn, DeploymentValidateOut, DestinationOut, DestinationWrite, DestroyOut, DetectionRunOut, DigestOut, DigestWorkspace, DriftOut, ErrorInfo, EventDetail, EventOut, ExplainOut, ExportCheck, FileUsageList, FileUsageOut, FromDbt, GatewayAuditOut, GitCredentialOut, GitOAuthComplete, GitOAuthStartOut, GitProviderOut, GitProviders, GitToken, GlossaryImport, GlossaryTermCreate, GlossaryTermHistory, GlossaryTermStatus, GlossaryTermUpdate, GlossaryTerms, GovernanceChange, GovernanceChanges, GrantOut, GroupInfo, Groups, HistoryEntry, HistoryEntryList, IdentityRemovedOut, ImpactItemOut, ImpactOut, ImportOut, InactiveOut, InboxItem, InboxOut, IngestLedgerItem, IngestLedgerList, IngestLedgerSummary, IngestOut, ItemChangeOut, JobBuilderCheckIn, JobBuilderCheckOut, JobBuilderExportIn, JobBuilderExportOut, JobBuilderImportIn, JobBuilderImportOut, JobBuilderJobOut, JobEventPending, JobEventTriggerOut, JobEventTypeOut, JobForEachOut, JobGrantIn, JobGrantOut, JobInfo, JobList, JobPermissionsIn, JobPermissionsOut, JobRunEventOut, JobRunInfo, JobRunList, JobRunStatsOut, JobTaskOut, JobTaskRunInfo, JobUpdate, JobsConsentComplete, JobsConsentStartOut, JobsDeployOut, JobsIdentityOut, JobsProblemOut, JobsRevokedOut, JobsSummaryOut, LastDeliveryOut, Limits, LimitsOut, LineageColumnEdgeOut, LineageEdgeOut, LineageGraphOut, LineageJobOut, LineageNodeOut, LineageStatusOut, LinkOut, MaskChangeOut, MaskConflictOut, MaskOut, MeOut, MyGitCredentials, MySecrets, NodeQualityOut, NotificationsOut, OwnerOut, PermissionsChangeItem, PermissionsInfo, PermissionsOut, PermissionsUpdate, PreviewOut, PrincipalIn, PrincipalOut, PrivilegeAssignment, ProducerCreate, ProducerCreatedOut, ProducerOut, Producers, ProfileOut, ProfileSummaryOut, ProjectActionOut, ProjectActionResult, ProjectActionRun, ProjectActions, ProjectBranchCreate, ProjectBranchName, ProjectBranchOut, ProjectCommit, ProjectCommitCreate, ProjectCommitOut, ProjectCreate, ProjectCreated, ProjectDetail, ProjectDiff, ProjectDiffOut, ProjectDocsTicket, ProjectExplainOut, ProjectFileCreate, ProjectFileOut, ProjectFileSave, ProjectFiles, ProjectGrantIn, ProjectGrantOut, ProjectHead, ProjectHistory, ProjectInfo, ProjectLastRun, ProjectList, ProjectParamOut, ProjectPermissionsOut, ProjectPermissionsSet, ProjectPullOut, ProjectRunArtifact, ProjectRunInfo, ProjectRunList, ProjectScaffoldOut, ProjectTreeEntry, PropertyOut, QualityRunCreate, QualityRuns, QualitySummary, QueryEngine, QueryEngines, QueryItemOut, QueryOut, QueryStatsOut, RecentOut, RemoteBranch, RemoteBranches, RemovedOut, ResultManifest, ResultPage, RowFilterOut, RuleOut, RunCatalogScope, RunCatalogScopeInfo, RunNow, RunOut, RunScopeCapIn, RunScopeCapOut, RunSummaryOut, SampleColumn, SampleInfo, SavedQueryIn, SavedQueryList, SavedQueryOut, SavedQueryUpdate, SchemaCreate, SchemaInfo, SchemaList, SearchGroup, SearchHit, SearchOut, SearchResults, SearchTable, SearchTerm, SecretExplainOut, SecretGrantIn, SecretGrantOut, SecretOut, SecretPermissionsOut, SecretPermissionsUpdate, SecretRewrapOut, SecretScopeCreate, SecretScopeOut, SecretScopes, SecretUseOut, SecretValue, Secrets, SelectAdminMissing, SelectBackfillOut, SelectCatalog, SelectCoverageOut, SelectMissing, SessionPip, ShortSecretOut, ShortSecrets, SlaOut, SnapshotInfo, SnapshotList, SourceQualityOut, SparkOut, SqeOut, StatementColumn, StatementExecute, StatementExplain, StatementFailure, StatementInfo, StatementRows, StatementSubmit, StatementTranspile, StorageLocationIn, StorageLocationInfo, StorageLocationList, StorageLocationPatch, StrayOut, StraysOut, StraysRemove, SubjectEraseOut, SubjectExportOut, SuggestionOut, SuggestionSourceOut, SuggestionsApply, SuggestionsOut, SystemJobRunOut, SystemKernelOut, SystemOut, SystemRunOut, SystemTagOut, TableContracts, TableInfo, TableList, TableSummary, TableTermOut, TableTerms, TagOnColumnOut, TagOut, TagsOut, TemplateOut, TemplateRepoChange, TemplateRepoCreate, TemplateRepoOut, TemplateRepos, TemplateTypeOut, TemplatesOut, TermOut, TermVersionOut, TestOut, TranspileOut, TranspileReason, TranspiledStatement, Upload, UploadLoad, Uploads, UpstreamProblemOut, UpstreamProblemsOut, VerificationOut, VerificationRun, VerifyOut, ViewInfo, ViewList, VolumeCreate, VolumeExplanation, VolumeFile, VolumeFiles, VolumeGrant, VolumeGrantInfo, VolumeInfo, VolumePermissions, VolumePermissionsUpdate, Volumes, WorkspaceCatalogCreate, WorkspaceCatalogInfo, WorkspaceCatalogList, WorkspaceCreate, WorkspaceInfo, WorkspaceJobInfo, WorkspaceJobList, WorkspaceJobRunInfo, WorkspaceJobRunList, WorkspaceJobStats, WorkspaceList, WorkspaceStorageOut, WorkspaceSummaryOut, WorkspaceUpdate):
     _m.model_rebuild()
