@@ -659,10 +659,16 @@ class Quality(_Service):
 class Lineage(_Service):
     @op("lineage_get")
     def get(self, slug: str, catalog: str, schema: str, table: str, *, direction: str | None = None,
-            depth: int | None = None, column: str | None = None) -> m.LineageGraphOut:  # fmt: skip
-        """The graph around the table: ``up``, ``down`` or ``both`` (default), ``depth`` steps (default 2)."""
+            depth: int | None = None, column: str | None = None, columns: str | None = None,
+            indirect: str | None = None) -> m.LineageGraphOut:  # fmt: skip
+        """The graph around the table: ``up``, ``down`` or ``both`` (default), ``depth`` steps (default 2).
+
+        ``column`` follows one column; ``columns="all"`` returns the edges of every column of the table instead.
+        ``indirect="dataset"`` adds the table-level inputs (join, filter, group by) that affect every column.
+        """
         return self._http.get(_table(slug, catalog, schema, table, "lineage"), m.LineageGraphOut,
-                              direction=direction, depth=depth, column=column)  # fmt: skip
+                              direction=direction, depth=depth, column=column, columns=columns,
+                              indirect=indirect)  # fmt: skip
 
     @op("lineage_impact")
     def impact(self, slug: str, catalog: str, schema: str, table: str, *, column: str | None = None) -> m.ImpactOut:
