@@ -40,6 +40,7 @@ NOT_IN_SDK: dict[str, str] = {
     "audit_ingest": "a deployment's audit shipper posts it with its own key, not a person",
     "audit_ingest_storage": "the object store's access log shipper posts it with the storage ingest key, not a person",
     "projects_runs_docs_view": "a browser frame opens the ticket's url (no token); Projects.docs_ticket() gets one",
+    "storage_notifications": "the object store posts its notifications with a source key, not a person",
     "spark_audit_ingest": "the Spark gateway posts it with its own key, not a person",
     "lineage_events_ingest": "engines post OpenLineage events with a producer key, not a person",
     "quality_runs_run_all": "a server-sent stream for the quality page; Quality.run() runs a table's checks",

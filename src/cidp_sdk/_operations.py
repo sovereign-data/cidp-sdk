@@ -7,7 +7,7 @@ first use (``PreviewWarning``). ``internal`` operations, the data UI's own, are 
 without notice.
 """
 
-# contract sha256: 6ef3c048ef311933ab83c89fc13a4418dc111c2700bf4142a4e7111e246dcdcb
+# contract sha256: 8dd2b82734904236c53af4d3a7db04c7b5e2e081f8a47e2b64cede6bab86c25b
 # ruff: noqa: E501
 
 OPERATIONS: dict[str, tuple[str, str, str, str]] = {
@@ -192,6 +192,7 @@ OPERATIONS: dict[str, tuple[str, str, str, str]] = {
     'storage_locations_delete': ('DELETE', '/storage-locations/{storage_location}', 'stable', 'catalog'),
     'storage_locations_list': ('GET', '/storage-locations', 'stable', 'catalog'),
     'storage_locations_update': ('PATCH', '/storage-locations/{storage_location}', 'stable', 'catalog'),
+    'storage_notifications': ('POST', '/storage/notifications/{source}', 'stable', 'ingest'),
     'subjects_erase': ('POST', '/subjects/{subject}/erase', 'preview', 'admin'),
     'subjects_export': ('GET', '/subjects/{subject}/export', 'preview', 'admin'),
     'system_get': ('GET', '/workspaces/{workspace}/system', 'preview', 'system'),

@@ -9,7 +9,7 @@
       "catalog": "1.12",
       "governance": "1.28",
       "iceberg": "1.0",
-      "ingest": "1.3",
+      "ingest": "1.4",
       "jobs": "1.11",
       "me": "1.8",
       "notifications": "1.2",
@@ -27762,7 +27762,7 @@
         },
         "x-paged": false,
         "x-service": "ingest",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; the caller's own and shared ones (in the handler)",
         "x-rate-class": "read"
@@ -27938,7 +27938,7 @@
           }
         },
         "x-service": "ingest",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace",
         "x-rate-class": "ingest",
@@ -28104,7 +28104,7 @@
           }
         },
         "x-service": "ingest",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; as the person (in the handler)",
         "x-rate-class": "query"
@@ -28262,7 +28262,7 @@
           }
         },
         "x-service": "ingest",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; as the person: Polaris and Ranger decide (in the handler)",
         "x-rate-class": "query",
@@ -28385,7 +28385,7 @@
           }
         },
         "x-service": "ingest",
-        "x-service-version": "1.3",
+        "x-service-version": "1.4",
         "x-stability": "preview",
         "x-permission": "data.view; view on the workspace; its uploader or a workspace operator (in the handler)",
         "x-rate-class": "write",
@@ -38737,6 +38737,126 @@
         "x-stability": "stable",
         "x-permission": "public or key; the Spark gateway's ingest key and x-portal-audit-schema (in the handler)",
         "x-rate-class": "write"
+      }
+    },
+    "/api/data/v1/storage/notifications/{source}": {
+      "post": {
+        "tags": [
+          "storage-notifications"
+        ],
+        "summary": "Storage Notifications",
+        "description": "The object store's notifications of created objects (S3 records from RustFS, MinIO or Ceph, or EventBridge\nObject Created events; at most 1 MiB and 1,000 records) with the source's key. A created object under a managed\nvolume's storage raises volume.file_added (origin storage) for each workspace that sees the volume; repeats, stale\nand unmatched records are counted only. A store failure is 503, so the sender retries.\n\nStability: stable. Permission: public or key; a notification source's key (in the handler).",
+        "operationId": "storage_notifications",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$",
+              "title": "Source"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageNotificationsOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-service": "ingest",
+        "x-service-version": "1.4",
+        "x-stability": "stable",
+        "x-permission": "public or key; a notification source's key (in the handler)",
+        "x-rate-class": "ingest",
+        "x-audit-action": "data.volume.file.arrived"
       }
     },
     "/api/data/v1/docs-view/{ticket}": {
@@ -54448,6 +54568,41 @@
         },
         "type": "object",
         "title": "StorageLocationPatch"
+      },
+      "StorageNotificationsOut": {
+        "properties": {
+          "received": {
+            "type": "integer",
+            "title": "Received"
+          },
+          "accepted": {
+            "type": "integer",
+            "title": "Accepted"
+          },
+          "duplicates": {
+            "type": "integer",
+            "title": "Duplicates"
+          },
+          "skipped": {
+            "type": "integer",
+            "title": "Skipped"
+          },
+          "unmatched": {
+            "type": "integer",
+            "title": "Unmatched"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "received",
+          "accepted",
+          "duplicates",
+          "skipped",
+          "unmatched"
+        ],
+        "title": "StorageNotificationsOut",
+        "description": "Counts only (data-file-arrival FA1): nothing about a record is echoed."
       },
       "StrayOut": {
         "properties": {
